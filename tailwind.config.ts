@@ -8,7 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {},
+      backgroundImage: {
+        "headphone-mob": "url('/assets/home/mobile/image-header.jpg')",
+        "circle-pattern": "url('/assets/home/desktop/pattern-circles.svg",
+      },
+      fontSize: {
+        sm: "13px",
+        semi: "14px",
+        md: "15px",
+        xl: "36px",
+      },
+      gridTemplateColumns: {
+        "3": "repeat(3, 1fr)",
+      },
     },
     colors: {
       primary: {
