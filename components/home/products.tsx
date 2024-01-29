@@ -56,19 +56,19 @@ export default function Headphone() {
         </div>
       </div>
 
-      <div className="bg-primary-brown pb-[55px] mt-[120px]  mx-6 rounded-lg">
+      <div className="bg-primary-brown relative overflow-hidden pb-[55px] mt-[120px]  mx-6 rounded-lg">
         <div className="">
           <Image
             src="/assets/home/desktop/pattern-circles.svg"
             alt="headphone"
             width={920}
             height={320}
-            className="absolute w-auto h-auto left-0 -translate-y-6 object-center z-0 "
+            className="absolute w-auto h-auto left-0 -translate-y-1 scale-[1.7] object-center"
           />
-          <div className="text-center pt-[90px] mx-6">
+          <div className="text-center pt-[60px] mx-6">
             <Image
               src="/assets/home/mobile/image-speaker-zx9.png"
-              alt="headphone"
+              alt="speaker"
               width={172}
               height={207}
               className=" mx-auto "
@@ -86,21 +86,32 @@ export default function Headphone() {
         </div>
       </div>
 
-      {/* <div className="rounded-lg bg-primary-gray mt-6 mx-6">
-        <Image
-          src="/assets/home/mobile/image-speaker-zx7.jpg"
-          alt="headphone"
-          width={172}
-          height={207}
-          className=" mx-auto w-auto h-auto"
-        />
+      <div className="rounded-lg bg-mb-speaker py-20 bg-right text-left bg-cover mt-6 mx-6">
+        <article className="px-6">
+          <h1 className="tracking-[2px] mt-8 mb-6 leading-10 text-secondary-dark font-bold text-ml ">
+            ZX7 SPEAKER
+          </h1>
 
-        <h1 className="tracking-[1.29px] mt-8 mb-6 leading-10 text-secondary-dark font-bold text-xl text-center">
-          ZX7 SPEAKER
-        </h1>
+          <ButtonTwo />
+        </article>
+      </div>
 
-        <ButtonTwo />
-      </div> */}
+      <div className="rounded-lg bg-mb-earphone py-24 bg-right text-left bg-cover mt-6 mx-6">
+        {/* <article className="px-6">
+          <h1 className="tracking-[2px] mt-8 mb-6 leading-10 text-secondary-dark font-bold text-ml ">
+            ZX7 SPEAKER
+          </h1>
+
+        </article> */}
+      </div>
+      <div className="rounded-lg bg-primary-gray py-6 bg-right text-left mt-6 mx-6">
+        <article className="px-6">
+          <h1 className="tracking-[2px] mt-8 mb-6 leading-10 text-secondary-dark font-bold text-ml ">
+            YX1 EARPHONES
+          </h1>
+          <ButtonTwo />
+        </article>
+      </div>
     </section>
   );
 }

@@ -10,12 +10,15 @@ const config: Config = {
     extend: {
       backgroundImage: {
         "headphone-mob": "url('/assets/home/mobile/image-header.jpg')",
-        "circle-pattern": "url('/assets/home/desktop/pattern-circles.svg",
+        "circle-pattern": "url('/assets/home/desktop/pattern-circles.svg)",
+        "mb-speaker": "url('/assets/home/mobile/image-speaker-zx7.jpg')",
+        "mb-earphone": "url('/assets/home/mobile/image-earphones-yx1.jpg')",
       },
       fontSize: {
         sm: "13px",
         semi: "14px",
         md: "15px",
+        ml: "28px",
         xl: "36px",
       },
       gridTemplateColumns: {
