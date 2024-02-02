@@ -6,10 +6,10 @@ import Headphone from "@/components/home/products";
 export default function Home() {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <HomeHeader />
       <Headphone />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

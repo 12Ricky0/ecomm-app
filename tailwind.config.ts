@@ -10,9 +10,14 @@ const config: Config = {
     extend: {
       backgroundImage: {
         "headphone-mob": "url('/assets/home/mobile/image-header.jpg')",
-        "circle-pattern": "url('/assets/home/desktop/pattern-circles.svg)",
+        "headphone-tablet": "url('/assets/home/tablet/image-header.jpg')",
+        "headphone-desktop": "url('/assets/home/desktop/image-hero.jpg')",
         "mb-speaker": "url('/assets/home/mobile/image-speaker-zx7.jpg')",
+        "tb-speaker": "url('/assets/home/tablet/image-speaker-zx7.jpg')",
+        "dk-speaker": "url('/assets/home/desktop/image-speaker-zx7.jpg')",
         "mb-earphone": "url('/assets/home/mobile/image-earphones-yx1.jpg')",
+        "tb-earphone": "url('/assets/home/tablet/image-earphones-yx1.jpg')",
+        "dk-earphone": "url('/assets/home/desktop/image-earphones-yx1.jpg')",
       },
       fontSize: {
         sm: "13px",
@@ -20,6 +25,7 @@ const config: Config = {
         md: "15px",
         ml: "28px",
         xl: "36px",
+        xxl: "56px",
       },
       gridTemplateColumns: {
         "3": "repeat(3, 1fr)",

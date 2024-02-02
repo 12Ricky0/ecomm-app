@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Footer() {
   const date = new Date().getFullYear();
   return (
-    <footer className=" bg-primary-very-dark mt-[120px] absolute bottom-0 w-[100%] pb-[38px]">
+    <footer className=" bg-primary-very-dark mt-[120px] relative bottom-0 w-[100%] pb-[38px]">
       <div className="bg-primary-brown h-1 w-[101px] mx-auto md:mx-10 lg:mx-[10%]" />
       <section className="lg:mx-[10%] lg:pt-[75px]">
         <div className="lg:flex lg:justify-between ">
