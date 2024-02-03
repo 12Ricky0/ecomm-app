@@ -1,5 +1,6 @@
 import { ButtonTwo, ButtonThree, ButtonFour } from "../buttons";
 import Image from "next/image";
+
 export default function Headphone() {
   return (
     <section>
