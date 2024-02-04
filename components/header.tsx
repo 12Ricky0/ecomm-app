@@ -92,7 +92,7 @@ export function HeadphoneBanner() {
 export function SpeakerBanner() {
   return (
     <div className="bg-primary-very-dark">
-      <h1 className="py-8 text-ml text-secondary-white font-bold leading-normal tracking-[2px] text-center">
+      <h1 className="py-8 md:py-[97px] text-ml text-secondary-white font-bold leading-normal tracking-[2px] text-center">
         SPEAKERS
       </h1>
     </div>
@@ -101,7 +101,7 @@ export function SpeakerBanner() {
 export function EarphoneBanner() {
   return (
     <div className="bg-primary-very-dark">
-      <h1 className="py-8 text-ml text-secondary-white font-bold leading-normal tracking-[2px] text-center">
+      <h1 className="py-8 md:py-[97px] text-ml text-secondary-white font-bold leading-normal tracking-[2px] text-center">
         EARPHONES
       </h1>
     </div>

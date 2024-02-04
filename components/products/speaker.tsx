@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { ButtonOne, ButtonThree } from "../buttons";
-import ProductFooter from "../product-footer";
 import MixedProduct from "../mixed-product";
+import ProductFooter from "../product-footer";
 import data from "../products/data.json";
-export default function Headphones() {
-  let product = data.filter((d) => d.category === "headphones");
+
+export default function Speakers() {
+  let product = data.filter((d) => d.category === "speakers");
   return (
     <section className="mx-6 md:mx-0">
       {product.map((item) => (
