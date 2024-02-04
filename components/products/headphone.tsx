@@ -4,7 +4,7 @@ import data from "../products/data.json";
 export default function Headphones() {
   let product = data.filter((d) => d.category === "headphones");
   return (
-    <section className="mx-6">
+    <section className="mx-6 md:mx-0">
       {product.map((item) => (
         // <section key={item.id} className="mb-[120px]">
         <section
@@ -22,9 +22,9 @@ export default function Headphones() {
           <Image
             src={item.categoryImage.tablet}
             alt="headephone image"
-            width={327}
+            width={689}
             height={352}
-            className="w-auto h-auto mt-[64px] hidden lg:hidden md:block rounded-lg "
+            className="w-[100%] h-auto mt-[64px] hidden lg:hidden md:block rounded-lg "
             priority
           />
           <Image
@@ -36,7 +36,7 @@ export default function Headphones() {
             className="w-[50%] mr-6 mt-[64px] lg:block hidden rounded-lg "
           />
 
-          <article className="md:w-[445px] ">
+          <article className="lg:w-[445px] md:w-[572px] md:mx-auto">
             <article className="text-center lg:text-left">
               <h3 className="leading-normal mt-8 tracking-[10px] text-primary-brown opacity-50 text-semi font-normal text-center lg:text-left">
                 NEW PRODUCT

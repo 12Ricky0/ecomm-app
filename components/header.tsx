@@ -7,7 +7,7 @@ export function NavHeader() {
   return (
     <nav className="bg-primary-very-dark">
       <header className=" h-[90px] md:mx-[40px] lg:mx-[165px] bg-primary-very-dark border-b-secondary-white border-opacity-10 border-b">
-        <div className="h-[90px] lg:hidden flex mx-6 justify-between items-center">
+        <div className="h-[90px] lg:hidden flex mx-6 md:mx-0 justify-between items-center">
           <Image
             src="/assets/shared/tablet/icon-hamburger.svg"
             alt="hamburger"
