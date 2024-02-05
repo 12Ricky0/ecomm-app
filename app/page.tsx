@@ -10,14 +10,14 @@ import HomePage from "@/components/home/products";
 import Headphones from "@/components/products/headphone";
 import Speakers from "@/components/products/speaker";
 import Earphones from "@/components/products/earphone";
+import ProductDetails from "@/components/details/product-details";
 
 export default function Home() {
   return (
     <div>
       <NavHeader />
-      <EarphoneBanner />
-      <HomePage />
-      <Footer />
+      <ProductDetails />
+      {/* <Footer /> */}
       {/* <HomeHeader />
       <Headphone />
       <Footer /> */}
