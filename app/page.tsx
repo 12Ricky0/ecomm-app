@@ -17,7 +17,7 @@ export default function Home() {
     <div>
       <NavHeader />
       <ProductDetails />
-      {/* <Footer /> */}
+      <Footer />
       {/* <HomeHeader />
       <Headphone />
       <Footer /> */}

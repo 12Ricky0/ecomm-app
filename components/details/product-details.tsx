@@ -1,8 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { QuantityButton } from "../buttons";
+import { ButtonOne, QuantityButton } from "../buttons";
+import MixedProduct from "../mixed-product";
+import ProductFooter from "../product-footer";
+import data from "../products/data.json";
 
 export default function ProductDetails() {
+  let detailedProduct = data.find((d) => d.name === "XX99 Mark II Headphones");
+
   return (
     <section className="mx-6">
       <Link
@@ -14,12 +19,11 @@ export default function ProductDetails() {
 
       <section className="lg:flex md:mx-[40px] lg:mx-[165px] justify-between items-center lg:mb-[160px] mb-[120px]">
         <Image
-          src="/assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg"
+          src={detailedProduct?.categoryImage.mobile}
           alt="headephone image"
           width={327}
           height={352}
           className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
-          priority
         />
         {/* <Image
           src={item.categoryImage.tablet}
@@ -48,12 +52,13 @@ export default function ProductDetails() {
               HEADPHONES
             </h1>
             <p className="opacity-50 mb-6 leading-[25px] text-secondary-dark text-md font-medium text-left">
-              The new XX99 Mark II headphones is the pinnacle of pristine audio.
-              It redefines your premium headphone experience by reproducing the
-              balanced depth and precision of studio-quality sound.
+              {detailedProduct?.description}
             </p>
             <h3 className="leading-normal tracking-[1.29px] text-secondary-dark font-bold text-[18px] mb-[31px]">
-              $ 2,999
+              {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(Number(detailedProduct?.price))}
             </h3>
             <div className="inline-flex gap-4">
               <QuantityButton />
@@ -95,6 +100,92 @@ export default function ProductDetails() {
             </div>
           </article>
         </article>
+
+        <div className="mt-[88px]">
+          <Image
+            src="/assets/product-xx99-mark-two-headphones/mobile/image-gallery-1.jpg"
+            alt="headephone image"
+            width={327}
+            height={352}
+            className="w-auto h-auto md:hidden rounded-lg "
+            priority
+          />
+          <Image
+            src="/assets/product-xx99-mark-two-headphones/mobile/image-gallery-2.jpg"
+            alt="headephone image"
+            width={327}
+            height={352}
+            className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
+            priority
+          />
+          <Image
+            src="/assets/product-xx99-mark-two-headphones/mobile/image-gallery-3.jpg"
+            alt="headephone image"
+            width={327}
+            height={352}
+            className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
+            priority
+          />
+        </div>
+
+        <div className="mt-[88px] text-center">
+          <h1 className="text-[24px] font-bold text-secondary-dark tracking-[0.86px] leading-9">
+            YOU MAY ALSO LIKE
+          </h1>
+
+          <div>
+            <Image
+              src="/assets/shared/mobile/image-xx99-mark-one-headphones.jpg"
+              alt="headephone image"
+              width={327}
+              height={352}
+              className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
+              priority
+            />
+            <h1 className="text-[24px] font-bold text-secondary-dark tracking-[0.86px] my-[32px] leading-9">
+              XX99 MARK I
+            </h1>
+            <div className="mb-[56px]">
+              <ButtonOne />
+            </div>
+          </div>
+          <div>
+            <Image
+              src="/assets/shared/mobile/image-xx59-headphones.jpg"
+              alt="headephone image"
+              width={327}
+              height={352}
+              className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
+              priority
+            />
+            <h1 className="text-[24px] font-bold text-secondary-dark tracking-[0.86px] my-[32px] leading-9">
+              XX59
+            </h1>
+            <div className="mb-[56px]">
+              <ButtonOne />
+            </div>
+          </div>
+          <div>
+            <Image
+              src="/assets/shared/mobile/image-zx9-speaker.jpg"
+              alt="headephone image"
+              width={327}
+              height={352}
+              className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
+              priority
+            />
+            <h1 className="text-[24px] font-bold text-secondary-dark tracking-[0.86px] my-[32px] leading-9">
+              ZX9 SPEAKER
+            </h1>
+            <div className="pb-[110px]">
+              <ButtonOne />
+            </div>
+          </div>
+        </div>
+        <div>
+          <MixedProduct />
+          <ProductFooter />
+        </div>
       </section>
     </section>
   );
