@@ -27,8 +27,11 @@ const config: Config = {
         xl: "36px",
         xxl: "56px",
       },
+      gridTemplateRows: {
+        "2": "repeat(2, 280px)",
+      },
       gridTemplateColumns: {
-        "3": "repeat(3, 1fr)",
+        "2": "repeat(2, auto)",
       },
     },
     colors: {
