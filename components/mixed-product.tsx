@@ -3,7 +3,7 @@ import { ButtonThree } from "./buttons";
 
 export default function MixedProduct() {
   return (
-    <section className="md:grid gap-[30px] md:gap-[10px] lg:gap-[30px] justify-center grid-cols-3 lg:mx-[165px] md:mx-[40px] shrink-0">
+    <section className="md:grid gap-[30px] md:gap-[10px] lg:gap-[30px] justify-center grid-cols-3 lg:mx-[165px] md:mx-[40px] mx-6 shrink-0">
       <div className="rounded-lg mt-[100px] relative pb-[22px] text-center  text-secondary-dark font-bold text-md tracking-[1.07px] bg-primary-gray ">
         <Image
           src="/assets/shared/desktop/image-category-thumbnail-headphones.png"

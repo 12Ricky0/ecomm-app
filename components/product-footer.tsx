@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ProductFooter() {
   return (
-    <section className=" mt-[120px] lg:flex justify-between flex-row-reverse  md:mx-[40px] lg:mx-[165px] rounded-lg">
+    <section className=" mt-[120px] lg:flex justify-between flex-row-reverse  md:mx-[40px] lg:mx-[165px] mx-6 rounded-lg">
       <Image
         src="/assets/shared/mobile/image-best-gear.jpg"
         alt="best-gear"
@@ -24,9 +24,9 @@ export default function ProductFooter() {
         height={588}
         className="hidden lg:block rounded-lg"
       />
-      <article className="text-center pt-[32px] lg:inline-flex items-center md:mx-auto lg:mx-0 md:w-[445px]">
+      <article className="text-center pt-[32px] lg:inline-flex items-center md:mx-auto lg:mx-0 md:w-[573px] lg:w-[445px]">
         <article>
-          <h1 className="tracking-[1px] pb-8 leading-[38.25px] text-secondary-dark font-bold text-ml text-center lg:text-left">
+          <h1 className="tracking-[1px] pb-8 leading-[38.25px] md:text-[40px] md:tracking-[1.43px] md:leading-[44px] text-secondary-dark font-bold text-ml text-center lg:text-left">
             BRING YOU THE <span className="text-primary-brown">BEST </span>
             AUDIO GEAR
           </h1>
