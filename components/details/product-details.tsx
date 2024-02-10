@@ -59,7 +59,7 @@ export default function ProductDetails() {
               $ {new Intl.NumberFormat().format(Number(detailedProduct?.price))}
             </h3>
             <div className="inline-flex gap-4">
-              <QuantityButton />
+              <QuantityButton className="bg-primary-gray flex py-[15px] w-[120px] justify-center" />
               <button className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
                 ADD TO CARD
               </button>

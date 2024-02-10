@@ -11,12 +11,18 @@ import Headphones from "@/components/products/headphone";
 import Speakers from "@/components/products/speaker";
 import Earphones from "@/components/products/earphone";
 import ProductDetails from "@/components/details/product-details";
+import Overlay from "@/components/overlay";
+import Cart from "@/components/modal/cart";
+import Checkout from "@/components/details/checkout";
 
 export default function Home() {
   return (
     <div>
       <NavHeader />
-      <ProductDetails />
+      {/* <Cart />
+
+      <ProductDetails /> */}
+      <Checkout />
       <Footer />
       {/* <HomeHeader />
       <Headphone />

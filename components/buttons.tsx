@@ -44,8 +44,8 @@ export function ButtonFour() {
     </button>
   );
 }
-
-export function QuantityButton() {
+// ("bg-primary-gray flex py-[15px] w-[120px] justify-center");
+export function QuantityButton({ className }: { className: string }) {
   let [quantity, setQuantity] = useState(1);
   function handleReduce() {
     if (quantity > 1) {
@@ -53,7 +53,7 @@ export function QuantityButton() {
     }
   }
   return (
-    <div className="bg-primary-gray flex py-[15px] w-[120px] justify-center">
+    <div className={className}>
       <button
         onClick={handleReduce}
         className="text-secondary-dark w-4 opacity-25 font-bold text-[13px] tracking-[1px] leading-normal"
@@ -68,6 +68,16 @@ export function QuantityButton() {
         className="text-secondary-dark opacity-25 font-bold text-[13px] tracking-[1px] w-4 leading-normal"
       >
         +
+      </button>
+    </div>
+  );
+}
+
+export function CheckoutButton() {
+  return (
+    <div className="mx-7 pb-[31px]">
+      <button className="h-12 w-[100%]  bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
+        CHECKOUT
       </button>
     </div>
   );

@@ -40,6 +40,7 @@ const config: Config = {
         "very-dark": "#101010",
         gray: "#F1F1F1",
         "light-gray": "#FAFAFA",
+        modal: "rgba(0, 0, 0, 0.5)",
       },
 
       secondary: {
