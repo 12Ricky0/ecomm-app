@@ -126,7 +126,7 @@ export default function ProductDetails() {
             />
           </div>
           {/* Tablet View */}
-          <div className="hidden lg:hidden md:grid grid-cols-2 grid-rows-2  gap-[30px]">
+          <div className="hidden lg:hidden md:grid grid-cols-3 grid-rows-3  gap-[30px]">
             <div className=" col-span-2">
               <Image
                 src={detailedProduct?.gallery.first.tablet!}

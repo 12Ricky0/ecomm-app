@@ -14,14 +14,17 @@ import ProductDetails from "@/components/details/product-details";
 import Overlay from "@/components/overlay";
 import Cart from "@/components/modal/cart";
 import Checkout from "@/components/details/checkout";
+import Menu from "@/components/modal/menu";
+import CheckoutModal from "@/components/modal/checkout-modal";
 
 export default function Home() {
   return (
     <div>
       <NavHeader />
-      {/* <Cart />
-
-      <ProductDetails /> */}
+      {/* <Cart /> */}
+      {/* <Menu /> */}
+      {/* <CheckoutModal /> */}
+      {/* <ProductDetails /> */}
       <Checkout />
       <Footer />
       {/* <HomeHeader />
