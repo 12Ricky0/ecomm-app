@@ -1,8 +1,11 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const date = new Date().getFullYear();
+  const pathname = usePathname();
   return (
     <footer className=" bg-primary-very-dark mt-[120px] relative bottom-0 w-[100%] pb-[38px]">
       <div className="bg-primary-brown h-1 w-[101px] mx-auto md:mx-10 lg:mx-[10%]" />
@@ -17,26 +20,40 @@ export default function Footer() {
           />
           <div className="flex flex-col gap-4 lg:gap-[34px] lg:mr-[60px] md:flex-row md:w-[429px]  md:ml-[40px] lg:ml-0">
             <Link
-              href=""
-              className="font-bold text-secondary-white leading-6 tracking-[2px] mx-auto hover:text-primary-brown"
+              href="/"
+              className={`font-bold  leading-6 tracking-[2px] mx-auto hover:text-primary-brown ${
+                pathname === "/" ? "text-primary-brown" : "text-secondary-white"
+              }`}
             >
               HOME
             </Link>
             <Link
-              href=""
-              className="font-bold text-secondary-white leading-6 tracking-[2px] mx-auto hover:text-primary-brown"
+              href="/headphones"
+              className={`font-bold  leading-6 tracking-[2px] mx-auto hover:text-primary-brown ${
+                pathname === "/headphones"
+                  ? "text-primary-brown"
+                  : "text-secondary-white"
+              }`}
             >
               HEADPHONES
             </Link>
             <Link
-              href=""
-              className="font-bold text-secondary-white leading-6 tracking-[2px] mx-auto hover:text-primary-brown"
+              href="/speakers"
+              className={`font-bold  leading-6 tracking-[2px] mx-auto hover:text-primary-brown ${
+                pathname === "/speakers"
+                  ? "text-primary-brown"
+                  : "text-secondary-white"
+              }`}
             >
               SPEAKERS
             </Link>
             <Link
-              href=""
-              className="font-bold text-secondary-white leading-6 tracking-[2px] mx-auto hover:text-primary-brown"
+              href="/earphones"
+              className={`font-bold  leading-6 tracking-[2px] mx-auto hover:text-primary-brown ${
+                pathname === "/earphones"
+                  ? "text-primary-brown"
+                  : "text-secondary-white"
+              }`}
             >
               EARPHONES
             </Link>

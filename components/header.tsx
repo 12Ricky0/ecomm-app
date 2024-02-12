@@ -44,25 +44,25 @@ export function NavHeader() {
           <div className="inline-flex  gap-[34px]">
             <Link
               className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
-              href="#"
+              href="/"
             >
               HOME
             </Link>
             <Link
               className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
-              href="#"
+              href="/headphones"
             >
               HEADPHONES
             </Link>
             <Link
               className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
-              href="#"
+              href="/speakers"
             >
               SPEAKERS
             </Link>
             <Link
               className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
-              href="#"
+              href="/earphones"
             >
               EARPHONES
             </Link>

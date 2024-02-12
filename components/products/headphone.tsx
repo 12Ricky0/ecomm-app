@@ -2,16 +2,22 @@ import Image from "next/image";
 import { ButtonOne, ButtonThree } from "../buttons";
 import ProductFooter from "../product-footer";
 import MixedProduct from "../mixed-product";
-import data from "../products/data.json";
-export default function Headphones() {
-  let product = data.filter((d) => d.category === "headphones");
+// import data from "../products/data.json";
+
+export default async function Headphones() {
+  const promise = await fetch("http://localhost:3000/api");
+  const response = await promise.json();
+
+  let data: any[] = response.res;
+
+  const product = data.filter((d) => d.category === "headphones");
   return (
     <section className="mx-6 md:mx-0">
       {product.map((item) => (
         // <section key={item.id} className="mb-[120px]">
         <section
-          key={item.id}
-          className="lg:flex md:mx-[40px] lg:mx-[165px] even:flex-row-reverse justify-between items-center first:mt-[120px] lg:first:mt-[160px] lg:mb-[160px] mb-[120px]"
+          key={item._id}
+          className="lg:flex md:mx-[40px] lg:mx-[165px] even:flex-row-reverse justify-between items-center first:mt-[120px] lg:first:mt-[120px] lg:mb-[160px] mb-[120px]"
         >
           <Image
             src={item.categoryImage.mobile}

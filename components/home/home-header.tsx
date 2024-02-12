@@ -1,8 +1,12 @@
+"use client";
 import { ButtonOne } from "../buttons";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 // rounded-lg bg-mb-speaker py-20 bg-right text-left bg-cover mt-6 mx-6
 export default function HomeHeader() {
+  const pathname = usePathname();
+
   return (
     <section className="bg-headphone-mob lg:flex flex-col lg:bg-headphone-desktop md:bg-headphone-tablet bg-cover pb-[112px] md:pb-[250px] text-center bg-center">
       <header className=" h-[90px] md:mx-[40px] lg:mx-[165px]  border-b-secondary-white border-opacity-10 border-b">
@@ -42,14 +46,16 @@ export default function HomeHeader() {
 
           <div className="inline-flex  gap-[34px]">
             <Link
-              className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
-              href="#"
+              className={`font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown ${
+                pathname === "/" && "outline-dashed outline-primary-brown"
+              }`}
+              href="/"
             >
               HOME
             </Link>
             <Link
               className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
-              href="#"
+              href="/headphones"
             >
               HEADPHONES
             </Link>

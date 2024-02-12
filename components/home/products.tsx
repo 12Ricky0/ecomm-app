@@ -64,14 +64,7 @@ export default function HomePage() {
         </article>
       </div>
       <div className="md:mx-[40px] lg:mx-[165px] gap-6 md:flex">
-        <div className="rounded-lg bg-mb-earphone md:w-[50%] md:bg-tb-earphone lg:bg-dk-earphone py-24 md:py-[150px] bg-right text-left bg-cover mt-6 mx-6 md:mx-0">
-          {/* <article className="px-6">
-          <h1 className="tracking-[2px] mt-8 mb-6 leading-10 text-secondary-dark font-bold text-ml ">
-            ZX7 SPEAKER
-          </h1>
-
-        </article> */}
-        </div>
+        <div className="rounded-lg bg-mb-earphone md:w-[50%] md:bg-tb-earphone lg:bg-dk-earphone py-24 md:py-[150px] bg-right text-left bg-cover mt-6 mx-6 md:mx-0"></div>
 
         <div className="rounded-lg bg-primary-gray py-[41px] md:inline-flex items-center justify-center bg-right text-left mt-6 mx-6 md:mx-0 md:w-[50%]">
           <article className="px-6 md:px-0 ">

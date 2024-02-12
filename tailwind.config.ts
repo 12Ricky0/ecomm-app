@@ -28,10 +28,10 @@ const config: Config = {
         xxl: "56px",
       },
       gridTemplateRows: {
-        "3": "repeat(2, 1fr)",
+        "4": "repeat(2, 1fr)",
       },
       gridTemplateColumns: {
-        "3": "1fr,1fr, 3fr",
+        "4": "1fr,1fr, 3fr",
       },
     },
     colors: {
