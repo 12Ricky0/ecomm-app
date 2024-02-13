@@ -2,8 +2,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Cart from "./modal/cart";
 
 export function NavHeader() {
+  const pathname = usePathname();
+
+  const [displayCart, setDisplayCart] = useState(false);
+
   return (
     <nav className="bg-primary-very-dark">
       <header className=" h-[90px] md:mx-[40px] lg:mx-[165px] bg-primary-very-dark border-b-secondary-white border-opacity-10 border-b">
@@ -22,13 +28,21 @@ export function NavHeader() {
             height={25}
             className="w-auto h-auto"
           />
-          <Image
-            src="/assets/shared/desktop/icon-cart.svg"
-            alt="cart"
-            width={23}
-            height={20}
-            className="w-auto h-auto"
-          />
+          <div>
+            <Image
+              src="/assets/shared/desktop/icon-cart.svg"
+              alt="cart"
+              width={23}
+              height={20}
+              className="w-auto h-auto cursor-pointer"
+              onClick={() => setDisplayCart(!displayCart)!}
+            />
+            <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
+              <span className="text-[10px] text-secondary-white font-bold">
+                2
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* DESKTOP DESIGN */}
@@ -43,39 +57,62 @@ export function NavHeader() {
 
           <div className="inline-flex  gap-[34px]">
             <Link
-              className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
+              className={`font-bold  text-sm leading-6 tracking-[2px] hover:outline-dashed outline-primary-brown ${
+                pathname === "/" ? "text-primary-brown" : "text-secondary-white"
+              }`}
               href="/"
             >
               HOME
             </Link>
             <Link
-              className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
+              className={`font-bold  text-sm leading-6 tracking-[2px] hover:outline-dashed outline-primary-brown ${
+                pathname === "/headphones"
+                  ? "text-primary-brown"
+                  : "text-secondary-white"
+              }`}
               href="/headphones"
             >
               HEADPHONES
             </Link>
             <Link
-              className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
+              className={`font-bold  text-sm leading-6 tracking-[2px] hover:outline-dashed outline-primary-brown ${
+                pathname === "/speakers"
+                  ? "text-primary-brown"
+                  : "text-secondary-white"
+              }`}
               href="/speakers"
             >
               SPEAKERS
             </Link>
             <Link
-              className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
+              className={`font-bold  text-sm leading-6 tracking-[2px] hover:outline-dashed outline-primary-brown ${
+                pathname === "/earphones"
+                  ? "text-primary-brown"
+                  : "text-secondary-white"
+              }`}
               href="/earphones"
             >
               EARPHONES
             </Link>
           </div>
-          <Image
-            src="/assets/shared/desktop/icon-cart.svg"
-            alt="cart"
-            width={23}
-            height={20}
-            className="w-auto h-auto"
-          />
+          <div>
+            <Image
+              src="/assets/shared/desktop/icon-cart.svg"
+              alt="cart"
+              width={23}
+              height={20}
+              className="w-auto h-auto cursor-pointer"
+              onClick={() => setDisplayCart(!displayCart)!}
+            />
+            <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
+              <span className="text-[10px] text-secondary-white font-bold">
+                2
+              </span>
+            </div>
+          </div>
         </div>
       </header>
+      {displayCart && <Cart />}
     </nav>
   );
 }

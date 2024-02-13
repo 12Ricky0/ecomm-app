@@ -1,18 +1,24 @@
+"use server";
 import Image from "next/image";
 import Link from "next/link";
-import { ButtonOne, QuantityButton } from "../buttons";
+import { ButtonOne, QuantityButton, AddToCart } from "../buttons";
 import MixedProduct from "../mixed-product";
 import ProductFooter from "../product-footer";
-import data from "../products/data.json";
+import { productDetails } from "@/libs/action";
+import { create } from "@/libs/action";
 
-export default function ProductDetails() {
-  let detailedProduct = data.find((d) => d.name === "ZX9 Speaker");
+export default async function ProductDetails({ slug }: { slug: string }) {
+  const req = await productDetails(slug);
+  const detailedProduct = await req?.json();
+  // const arr:any[]=detailedProduct
+
+  // let detailedProduct = data.find((d) => d.name === "ZX9 Speaker");
 
   return (
     <section className="">
       <div className="mx-6 md:mx-[40px] lg:mx-[165px]">
         <Link
-          href="#"
+          href="/"
           className=" text-secondary-dark opacity-50 font-medium text-md leading-[25px] "
         >
           <p className="mt-4 lg:mt-[80px] md:mt-[33px]">Go Back</p>
@@ -48,9 +54,10 @@ export default function ProductDetails() {
               NEW PRODUCT
             </h3>
             <h1 className="tracking-[1px] lg:tracking-[1.43px] uppercase my-6 leading-normal md:leading-[32px] lg:leading-[44px] text-secondary-dark font-bold text-ml lg:text-[40px] text-left">
-              {detailedProduct?.name.slice(0, 4)}
+              {/* {detailedProduct?.name.slice(0, 4)}
               <br />
-              {detailedProduct?.name.slice(5, 15)}
+              {detailedProduct?.name.slice(5, 15)} */}
+              {detailedProduct?.name}
             </h1>
             <p className="opacity-50 mb-6 leading-[25px] text-secondary-dark text-md font-medium text-left">
               {detailedProduct?.description}
@@ -60,9 +67,10 @@ export default function ProductDetails() {
             </h3>
             <div className="inline-flex gap-4">
               <QuantityButton className="bg-primary-gray flex py-[15px] w-[120px] justify-center" />
-              <button className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
+              <AddToCart query={detailedProduct?.name} />
+              {/* <button className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
                 ADD TO CARD
-              </button>
+              </button> */}
             </div>
           </article>
         </article>
@@ -84,7 +92,7 @@ export default function ProductDetails() {
               IN THE BOX
             </h1>
             <div>
-              {detailedProduct?.includes.map((i, index) => (
+              {detailedProduct?.includes.map((i: any, index: number) => (
                 <div key={index} className="mt-6 md:mt-0 lg:mt-6">
                   <span className="leading-[25px] text-md font-bold text-primary-brown text-left mr-6">
                     {i.quantity}x
@@ -164,7 +172,7 @@ export default function ProductDetails() {
 
           {/* Desktop View */}
 
-          <div className="hidden lg:grid grid-cols-2 grid-rows-2  gap-[30px]">
+          <div className="hidden lg:grid grid-cols-4 grid-rows-4 gap-[30px]">
             <div className=" col-span-2">
               <Image
                 src={detailedProduct?.gallery.first.desktop!}
@@ -235,7 +243,7 @@ export default function ProductDetails() {
               {detailedProduct?.others[0].name}
             </h1>
             <div className="mb-[56px]">
-              <ButtonOne />
+              <ButtonOne href={`/details/${detailedProduct.others[0].slug}`} />
             </div>
           </div>
           <div>
@@ -268,7 +276,7 @@ export default function ProductDetails() {
               {detailedProduct?.others[1].name}
             </h1>
             <div className="mb-[56px]">
-              <ButtonOne />
+              <ButtonOne href={`/details/${detailedProduct.others[1].slug}`} />
             </div>
           </div>
           <div>
@@ -301,7 +309,7 @@ export default function ProductDetails() {
               {detailedProduct?.others[2].name}
             </h1>
             <div className="">
-              <ButtonOne />
+              <ButtonOne href={`/details/${detailedProduct.others[2].slug}`} />
             </div>
           </div>
         </div>

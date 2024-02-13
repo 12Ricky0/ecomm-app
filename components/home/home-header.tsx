@@ -8,7 +8,7 @@ export default function HomeHeader() {
   const pathname = usePathname();
 
   return (
-    <section className="bg-headphone-mob lg:flex flex-col lg:bg-headphone-desktop md:bg-headphone-tablet bg-cover pb-[112px] md:pb-[250px] text-center bg-center">
+    <section className="bg-headphone-mob lg:flex flex-col lg:bg-headphone-desktop md:bg-headphone-tablet bg-cover pb-[112px] md:pb-[250px] md:mb-[50px] lg:mb-[100px] text-center bg-center">
       <header className=" h-[90px] md:mx-[40px] lg:mx-[165px]  border-b-secondary-white border-opacity-10 border-b">
         <div className="h-[90px] lg:hidden flex mx-6 md:mx-0 justify-between items-center">
           <Image
@@ -46,28 +46,40 @@ export default function HomeHeader() {
 
           <div className="inline-flex  gap-[34px]">
             <Link
-              className={`font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown ${
-                pathname === "/" && "outline-dashed outline-primary-brown"
+              className={`font-bold  text-sm leading-6 tracking-[2px] hover:outline-dashed outline-primary-brown ${
+                pathname === "/" ? "text-primary-brown" : "text-secondary-white"
               }`}
               href="/"
             >
               HOME
             </Link>
             <Link
-              className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
+              className={`font-bold  text-sm leading-6 tracking-[2px] hover:outline-dashed outline-primary-brown ${
+                pathname === "/headphones"
+                  ? "text-primary-brown"
+                  : "text-secondary-white"
+              }`}
               href="/headphones"
             >
               HEADPHONES
             </Link>
             <Link
-              className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
-              href="#"
+              className={`font-bold  text-sm leading-6 tracking-[2px] hover:outline-dashed outline-primary-brown ${
+                pathname === "/speakers"
+                  ? "text-primary-brown"
+                  : "text-secondary-white"
+              }`}
+              href="/speakers"
             >
               SPEAKERS
             </Link>
             <Link
-              className="font-bold text-secondary-white text-sm leading-6 tracking-[2px] hover:text-primary-brown"
-              href="#"
+              className={`font-bold  text-sm leading-6 tracking-[2px] hover:outline-dashed outline-primary-brown ${
+                pathname === "/earphones"
+                  ? "text-primary-brown"
+                  : "text-secondary-white"
+              }`}
+              href="/earphones"
             >
               EARPHONES
             </Link>
@@ -94,7 +106,7 @@ export default function HomeHeader() {
             Experience natural, lifelike audio and exceptional build quality
             made for the passionate music enthusiast.
           </p>
-          <ButtonOne />
+          <ButtonOne href="/details/xx99-mark-two-headphones" />
         </article>
       </article>
       {/* <div className="">

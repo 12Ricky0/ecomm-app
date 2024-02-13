@@ -53,7 +53,7 @@ export default async function Earphones() {
               <p className="opacity-50 mb-6 leading-[25px] text-secondary-dark text-md font-medium text-center lg:text-left">
                 {item?.description}
               </p>
-              <ButtonOne />
+              <ButtonOne href={`/details/${item.slug}`} />
             </article>
           </article>
         </section>

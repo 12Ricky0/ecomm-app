@@ -48,7 +48,7 @@ export default function HomePage() {
                 Upgrade to premium speakers that are phenomenally built to
                 deliver truly remarkable sound.
               </p>
-              <ButtonFour />
+              <ButtonFour href="/details/zx9-speaker" />
             </article>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function HomePage() {
             ZX7 SPEAKER
           </h1>
 
-          <ButtonTwo />
+          <ButtonTwo href="details/zx7-speaker" />
         </article>
       </div>
       <div className="md:mx-[40px] lg:mx-[165px] gap-6 md:flex">
@@ -71,7 +71,7 @@ export default function HomePage() {
             <h1 className="tracking-[2px] mb-8 leading-10 text-secondary-dark font-bold text-ml ">
               YX1 EARPHONES
             </h1>
-            <ButtonTwo />
+            <ButtonTwo href="details/yx1-earphones" />
           </article>
         </div>
       </div>

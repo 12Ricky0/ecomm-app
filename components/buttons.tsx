@@ -1,29 +1,38 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { create } from "@/libs/action";
 
-export function ButtonOne() {
+export function ButtonOne({ href }: { href: string }) {
   return (
-    <button className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
-      SEE PRODUCT
-    </button>
+    <Link href={href}>
+      <button className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
+        SEE PRODUCT
+      </button>
+    </Link>
   );
 }
 
-export function ButtonTwo() {
+export function ButtonTwo({ href }: { href: string }) {
   return (
-    <button className="h-12 w-40 border hover:bg-secondary-dark tracking-[1px] leading-normal text-primary-very-dark hover:text-secondary-white font-bold text-sm">
-      SEE PRODUCT
-    </button>
+    <Link href={href}>
+      <button className="h-12 w-40 border hover:bg-secondary-dark tracking-[1px] leading-normal text-primary-very-dark hover:text-secondary-white font-bold text-sm">
+        SEE PRODUCT
+      </button>
+    </Link>
   );
 }
 
-export function ButtonThree() {
+export function ButtonThree({ href }: { href: string }) {
   return (
     <div className="flex items-center justify-center">
-      <span className="tracking-[1px] leading-normal font-bold text-sm mr-[13px] hover:text-primary-brown cursor-pointer text-secondary-dark">
+      <Link
+        href={href}
+        className="tracking-[1px] leading-normal font-bold text-sm mr-[13px] hover:text-primary-brown cursor-pointer text-secondary-dark"
+      >
         SHOP
-      </span>
+      </Link>
       <div>
         <Image
           src="/assets/shared/desktop/icon-arrow-right.svg"
@@ -37,11 +46,13 @@ export function ButtonThree() {
   );
 }
 
-export function ButtonFour() {
+export function ButtonFour({ href }: { href: string }) {
   return (
-    <button className="h-12 w-40 hover:border bg-secondary-dark tracking-[1px] hover:bg-none leading-normal hover:text-primary-very-dark text-secondary-white font-bold text-sm">
-      SEE PRODUCT
-    </button>
+    <Link href={href}>
+      <button className="h-12 w-40 hover:border bg-secondary-dark tracking-[1px] hover:bg-none leading-normal hover:text-primary-very-dark text-secondary-white font-bold text-sm">
+        SEE PRODUCT
+      </button>
+    </Link>
   );
 }
 // ("bg-primary-gray flex py-[15px] w-[120px] justify-center");
@@ -80,5 +91,23 @@ export function CheckoutButton() {
         CHECKOUT
       </button>
     </div>
+  );
+}
+
+export function AddToCart({ query }: { query: any }) {
+  let item: string[] = [];
+
+  function handleClick() {
+    item.push(query);
+    console.log(item);
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
+    >
+      ADD TO CARD
+    </button>
   );
 }

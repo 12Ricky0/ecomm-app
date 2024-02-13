@@ -14,7 +14,7 @@ export default function MixedProduct() {
           className="left-[50%] w-auto h-auto -translate-x-[50%] -translate-y-[70px] absolute"
         />
         <h3 className="mb-[17px] pt-[100px]">HEADPHONES</h3>
-        <ButtonThree />
+        <ButtonThree href="/headphones" />
       </div>
 
       <div className="rounded-lg shrink-0 mt-[70px] relative md:mt-[100px] pb-[22px] text-center w-[100%] text-secondary-dark font-bold text-md tracking-[1.07px] bg-primary-gray ">
@@ -41,7 +41,7 @@ export default function MixedProduct() {
         />
 
         <h3 className="mb-[17px] pt-[100px]">SPEAKERS</h3>
-        <ButtonThree />
+        <ButtonThree href="/speakers" />
       </div>
 
       <div className="rounded-lg shrink-0 mt-[70px] relative md:mt-[100px] pb-[22px] text-center w-[100%] text-secondary-dark font-bold text-md tracking-[1.07px] bg-primary-gray ">
@@ -54,7 +54,7 @@ export default function MixedProduct() {
         />
 
         <h3 className="mb-[17px] pt-[100px]">EARPHONES</h3>
-        <ButtonThree />
+        <ButtonThree href="/earphones" />
       </div>
     </section>
   );

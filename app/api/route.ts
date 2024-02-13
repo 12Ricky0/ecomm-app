@@ -1,5 +1,7 @@
-import mongoDBConnection from "@/libs/action";
+import { mongoDBConnection } from "@/libs/action";
 import Product from "@/libs/schema";
+
+export const revalidate = true;
 
 export async function POST(request: Request) {
   const res = await request.json();
@@ -11,8 +13,25 @@ export async function POST(request: Request) {
   );
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   await mongoDBConnection();
-  const res = await Product.find();
-  return Response.json({ res });
+  console.log(request.url);
+  let res = await Product.find();
+
+  //   if (request) {
+  //     res = await Product.findOne({ slug: query });
+  //   } else {
+  //   }
+  return Response.json(res);
 }
+// export async function GET(query: string) {
+//   await mongoDBConnection();
+//   console.log(query);
+//   let res;
+//   if (query) {
+//     res = await Product.findOne({ slug: query });
+//   } else {
+//     res = await Product.find();
+//   }
+//   return Response.json(res);
+// }
