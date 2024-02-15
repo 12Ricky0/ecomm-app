@@ -95,17 +95,17 @@ export function CheckoutButton() {
   );
 }
 
-export function AddToCart({ query }: { query: string }) {
+export function AddToCart({ name, price }: { name: string; price: number }) {
   const { setItems, setCart, cart }: any = useContext(CartContext);
 
   function handleClick() {
-    const updatedCart = [...cart, query];
-    if (cart.includes(query)) {
+    const updatedCart = [...cart, { name: name, price: price }];
+    const nameInCart = cart && cart.some((c: any) => c.name === name);
+    if (nameInCart) {
       return false;
     } else {
-      setCart(updatedCart);
+      setCart((prevData: any) => [...prevData, { name: name, price: price }]);
       setItems(updatedCart.length);
-      console.log(updatedCart);
       // localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
     // items.add(query);

@@ -8,11 +8,9 @@ import { CartContext } from "@/cart-provide";
 
 export function NavHeader() {
   const pathname = usePathname();
-  const { items }: any = useContext(CartContext);
+  const { items, displayCart, setDisplayCart }: any = useContext(CartContext);
   // const cart = localStorage.getItem("cart");
   // console.log(cart);
-
-  const [displayCart, setDisplayCart] = useState(false);
 
   return (
     <nav className="bg-primary-very-dark">
