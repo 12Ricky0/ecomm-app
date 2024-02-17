@@ -10,7 +10,7 @@ export default function Checkout() {
       >
         <div>
           <Link
-            href="#"
+            href="/"
             className=" text-secondary-dark opacity-50 font-medium text-md leading-[25px] "
           >
             <p className="mt-4 lg:mt-[80px] md:mt-[33px]">Go Back</p>
@@ -209,7 +209,7 @@ export default function Checkout() {
         </fieldset>
       </form>
 
-      <article className="bg-secondary-white mx- rounded-lg pb-[32px] mt-8 lg:mt-[145px] shrink-0">
+      <article className="bg-secondary-white mx- rounded-lg pb-[32px] lg:ml-[30px] mt-8 lg:mt-[145px] shrink-0">
         <h1 className="font-bold mx-6 py-8 leading-normal tracking-[1.29px] text-[18px]">
           SUMMARY
         </h1>

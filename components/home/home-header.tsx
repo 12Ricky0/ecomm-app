@@ -3,14 +3,19 @@ import { ButtonOne } from "../buttons";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { CartContext } from "@/cart-provide";
 import Cart from "../modal/cart";
 
 // rounded-lg bg-mb-speaker py-20 bg-right text-left bg-cover mt-6 mx-6
 export default function HomeHeader() {
   const pathname = usePathname();
-  const { items, displayCart, setDisplayCart }: any = useContext(CartContext);
+  const { displayCart, setDisplayCart }: any = useContext(CartContext);
+  let value = useRef<{ name: string; price: number }[]>();
+
+  try {
+    value.current = JSON.parse(localStorage.getItem("cart") || "");
+  } catch (error) {}
 
   return (
     <section className="bg-headphone-mob lg:flex flex-col lg:bg-headphone-desktop md:bg-headphone-tablet bg-cover pb-[112px] md:pb-[250px] md:mb-[50px] lg:mb-[100px] text-center bg-center">
@@ -37,13 +42,13 @@ export default function HomeHeader() {
                 alt="cart"
                 width={23}
                 height={20}
-                className="w-auto h-auto"
+                className="w-auto h-auto hover:outline-dashed outline-primary-brown"
                 onClick={() => setDisplayCart(!displayCart)!}
               />
-              {items > 0 && (
+              {value && (
                 <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                   <span className="text-[10px] text-secondary-white font-bold">
-                    {items}
+                    {value.current?.length}
                   </span>
                 </div>
               )}
@@ -108,13 +113,13 @@ export default function HomeHeader() {
                 alt="cart"
                 width={23}
                 height={20}
-                className="w-auto h-auto"
+                className="w-auto h-auto active:outline-dashed outline-primary-brown cursor-pointer"
                 onClick={() => setDisplayCart(!displayCart)!}
               />
-              {items > 0 && (
+              {value && (
                 <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                   <span className="text-[10px] text-secondary-white font-bold">
-                    {items}
+                    {value.current?.length}
                   </span>
                 </div>
               )}

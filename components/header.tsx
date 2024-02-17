@@ -1,5 +1,5 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,6 +11,11 @@ export function NavHeader() {
   const { items, displayCart, setDisplayCart }: any = useContext(CartContext);
   // const cart = localStorage.getItem("cart");
   // console.log(cart);
+  let value = useRef<{ name: string; price: number }[]>();
+
+  try {
+    value.current = JSON.parse(localStorage.getItem("cart") || "");
+  } catch (error) {}
 
   return (
     <nav className="bg-primary-very-dark">
@@ -39,10 +44,10 @@ export function NavHeader() {
               className="w-auto h-auto cursor-pointer"
               onClick={() => setDisplayCart(!displayCart)!}
             />
-            {items > 0 && (
+            {value && (
               <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                 <span className="text-[10px] text-secondary-white font-bold">
-                  {items}
+                  {value.current?.length}
                 </span>
               </div>
             )}
@@ -108,10 +113,10 @@ export function NavHeader() {
               className="w-auto h-auto cursor-pointer"
               onClick={() => setDisplayCart(!displayCart)!}
             />
-            {items > 0 && (
+            {value && (
               <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                 <span className="text-[10px] text-secondary-white font-bold">
-                  {items}
+                  {value.current?.length}
                 </span>
               </div>
             )}

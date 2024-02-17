@@ -87,11 +87,13 @@ export function QuantityButton({ className }: { className: string }) {
 
 export function CheckoutButton() {
   return (
-    <div className="mx-7 pb-[31px]">
-      <button className="h-12 w-[100%]  bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
-        CHECKOUT
-      </button>
-    </div>
+    <Link href="/checkout">
+      <div className="mx-7 pb-[31px]">
+        <button className="h-12 w-[100%]  bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
+          CHECKOUT
+        </button>
+      </div>
+    </Link>
   );
 }
 
@@ -106,11 +108,11 @@ export function AddToCart({ name, price }: { name: string; price: number }) {
     } else {
       setCart((prevData: any) => [...prevData, { name: name, price: price }]);
       setItems(updatedCart.length);
-      // localStorage.setItem("cart", JSON.stringify(updatedCart));
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      // console.log(cart);
     }
     // items.add(query);
     // setCart(items.size);
-    // console.log(items);
   }
 
   return (
