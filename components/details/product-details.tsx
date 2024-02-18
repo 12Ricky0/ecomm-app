@@ -70,6 +70,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               <AddToCart
                 name={detailedProduct?.slug}
                 price={detailedProduct?.price}
+                // qty={}
               />
               {/* <button className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
                 ADD TO CARD

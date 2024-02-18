@@ -6,7 +6,8 @@ import { CartContext } from "@/cart-provide";
 
 import Overlay from "../overlay";
 export default function Cart() {
-  const { cart, items, setCart, setItems }: any = useContext(CartContext);
+  const { cart, items, setCart, setItems, displayCart, setDisplayCart }: any =
+    useContext(CartContext);
   let total = 0;
   const itemName = {
     "yx1-earphones": "yx1",
@@ -20,26 +21,13 @@ export default function Cart() {
   // const [cartContent, setCartContent] = useState<
   //   { name: string; price: number }[]
   // >([]);
-  let value = useRef<{ name: string; price: number }[]>();
-
-  useEffect(() => {
-    // let value: { name: string; price: number };
-    // Get the value from local storage if it exists
-    // value.current = JSON.parse(localStorage.getItem("cart") || "");
-    // console.log(value);
-    // setCartContent((prevData) => [
-    //   ...prevData,
-    //   { name: value.name, price: value.price },
-    // ]);
-    // value.current = JSON.parse(localStorage.getItem("cart") || "");
-  }, []);
+  let value = useRef<{ name: string; price: number; qty: number }[]>();
 
   try {
     value.current = JSON.parse(localStorage.getItem("cart") || "");
   } catch (error) {}
 
-  value.current && value.current.map((c: any) => (total += c.price));
-
+  value.current && value.current.map((c: any) => (total += c.price * c.qty));
   return (
     <Overlay>
       <section className="z-[1000] bg-secondary-white md:w-[377px] overflow-auto lg:mr-[165px] md:mr-10 rounded-lg mx-6 relative md:absolute md:right-0 opacity-100 mt-6">
@@ -54,8 +42,9 @@ export default function Cart() {
             <span
               onClick={() => {
                 setCart("");
-                setItems(0);
                 localStorage.removeItem("cart");
+                // localStorage.removeItem("quantity");
+                setDisplayCart(!displayCart);
               }}
               className="cursor-pointer underline opacity-50 hover:text-primary-brown hover:opacity-100 text-secondary-dark font-medium text-md leading-[25px]"
             >
@@ -87,7 +76,10 @@ export default function Cart() {
           )} */}
           {value.current &&
             value.current.map(
-              (c: { name: string; price: number }, index: number) => (
+              (
+                c: { name: string; price: number; qty: number },
+                index: number
+              ) => (
                 <div key={index} className="mb-6">
                   <article className="flex justif items-center ">
                     <Image
@@ -108,7 +100,10 @@ export default function Cart() {
                         </span>
                       </div>
                       <div className="absolute md:right-[33px] right-[28px]">
-                        <QuantityButton className="bg-primary-gray flex py-[7px] w-[96px] justify-center" />
+                        <QuantityButton
+                          defaultValue={Number(c.qty)}
+                          className="bg-primary-gray flex py-[7px] w-[96px] justify-center"
+                        />
                       </div>
                     </div>
                   </article>

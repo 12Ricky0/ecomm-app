@@ -9,6 +9,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   //   const cookieStore = cookies();
   //   const theme = cookieStore.get("item");
   //   console.log(theme);
+
   return (
     <div>
       <NavHeader />

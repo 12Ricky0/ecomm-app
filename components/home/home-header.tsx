@@ -7,7 +7,6 @@ import { useContext, useState, useRef } from "react";
 import { CartContext } from "@/cart-provide";
 import Cart from "../modal/cart";
 
-// rounded-lg bg-mb-speaker py-20 bg-right text-left bg-cover mt-6 mx-6
 export default function HomeHeader() {
   const pathname = usePathname();
   const { displayCart, setDisplayCart }: any = useContext(CartContext);
@@ -43,7 +42,7 @@ export default function HomeHeader() {
                 width={23}
                 height={20}
                 className="w-auto h-auto hover:outline-dashed outline-primary-brown"
-                onClick={() => setDisplayCart(!displayCart)!}
+                onClick={() => setDisplayCart(!displayCart)}
               />
               {value && (
                 <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
@@ -116,12 +115,12 @@ export default function HomeHeader() {
                 className="w-auto h-auto active:outline-dashed outline-primary-brown cursor-pointer"
                 onClick={() => setDisplayCart(!displayCart)!}
               />
-              {value && (
-                <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
-                  <span className="text-[10px] text-secondary-white font-bold">
+              {value.current && (
+                <article className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
+                  <p className="text-[10px] text-secondary-white font-bold">
                     {value.current?.length}
-                  </span>
-                </div>
+                  </p>
+                </article>
               )}
             </div>
           </div>
@@ -144,9 +143,6 @@ export default function HomeHeader() {
           <ButtonOne href="/details/xx99-mark-two-headphones" />
         </article>
       </article>
-      {/* <div className="">
-        <ButtonOne />
-      </div> */}
     </section>
   );
 }

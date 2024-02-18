@@ -10,12 +10,19 @@ export default function CartProvider({
   children: React.ReactNode;
 }) {
   const [cart, setCart] = useState<{ name: string; amount: number }[]>([]);
-  const [items, setItems] = useState<Number>(0);
+  const [quantity, setQuantity] = useState<Number>(1);
   const [displayCart, setDisplayCart] = useState<boolean>(false);
 
   return (
     <CartContext.Provider
-      value={{ items, setItems, cart, setCart, displayCart, setDisplayCart }}
+      value={{
+        quantity,
+        setQuantity,
+        cart,
+        setCart,
+        displayCart,
+        setDisplayCart,
+      }}
     >
       {children}
     </CartContext.Provider>

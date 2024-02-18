@@ -1,5 +1,5 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { create } from "@/libs/action";
@@ -57,13 +57,25 @@ export function ButtonFour({ href }: { href: string }) {
   );
 }
 // ("bg-primary-gray flex py-[15px] w-[120px] justify-center");
-export function QuantityButton({ className }: { className: string }) {
-  let [quantity, setQuantity] = useState(1);
+export function QuantityButton({
+  className,
+  defaultValue,
+}: {
+  className: string;
+  defaultValue?: number;
+}) {
+  // let [quantity, setQuantity] = useState(1);
+  const { quantity, setQuantity, displayCart }: any = useContext(CartContext);
+
   function handleReduce() {
     if (quantity > 1) {
-      setQuantity(quantity--);
+      setQuantity((prevCount: any) => prevCount - 1);
+      // localStorage.setItem("quantity", JSON.stringify(quantity));
     }
   }
+  // useEffect(() => {
+  //   localStorage.setItem("quantity", JSON.stringify(quantity));
+  // }, [quantity]);
   return (
     <div className={className}>
       <button
@@ -73,10 +85,13 @@ export function QuantityButton({ className }: { className: string }) {
         -
       </button>
       <span className="px-[20px] text-secondary-dark font-bold text-[13px] tracking-[1px] leading-normal">
-        {quantity}
+        {displayCart ? defaultValue : quantity}
       </span>
       <button
-        onClick={() => setQuantity(quantity++)}
+        onClick={() => {
+          setQuantity((prevCount: any) => prevCount + 1);
+          // localStorage.setItem("quantity", JSON.stringify(quantity));
+        }}
         className="text-secondary-dark opacity-25 font-bold text-[13px] tracking-[1px] w-4 leading-normal"
       >
         +
@@ -98,18 +113,22 @@ export function CheckoutButton() {
 }
 
 export function AddToCart({ name, price }: { name: string; price: number }) {
-  const { setItems, setCart, cart }: any = useContext(CartContext);
+  const { quantity, setCart, cart, setQuantity }: any = useContext(CartContext);
 
   function handleClick() {
-    const updatedCart = [...cart, { name: name, price: price }];
+    const updatedCart = [...cart, { name: name, price: price, qty: quantity }];
     const nameInCart = cart && cart.some((c: any) => c.name === name);
     if (nameInCart) {
       return false;
     } else {
-      setCart((prevData: any) => [...prevData, { name: name, price: price }]);
-      setItems(updatedCart.length);
+      setCart((prevData: any) => [
+        ...prevData,
+        { name: name, price: price, qty: quantity },
+      ]);
+      // setItems(updatedCart.length);
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       // console.log(cart);
+      // setQuantity(1);
     }
     // items.add(query);
     // setCart(items.size);
@@ -122,5 +141,21 @@ export function AddToCart({ name, price }: { name: string; price: number }) {
     >
       ADD TO CARD
     </button>
+  );
+}
+
+export async function CartUi() {
+  let value = useRef<{ name: string; price: number }[]>();
+
+  try {
+    value.current = JSON.parse(localStorage.getItem("cart") || "");
+  } catch (error) {}
+
+  return (
+    <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
+      <span className="text-[10px] text-secondary-white font-bold">
+        {value.current?.length}
+      </span>
+    </div>
   );
 }

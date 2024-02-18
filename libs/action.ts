@@ -29,3 +29,24 @@ export async function create(data: string) {
     value: data,
   });
 }
+
+export type State = {
+  errors?: {
+    customerId?: string[];
+    amount?: string[];
+    status?: string[];
+  };
+  message?: string | null;
+};
+
+export async function handleUserData(formData: FormData) {
+  const rawFormData = Object.fromEntries(formData.entries());
+  console.log(rawFormData);
+}
+
+// export async function getDataFromLocalStorage() {
+//   try {
+//     let data = JSON.parse(localStorage.getItem("cart") || "");
+//     return data;
+//   } catch (error) {}
+// }

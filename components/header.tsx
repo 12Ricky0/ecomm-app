@@ -5,17 +5,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Cart from "./modal/cart";
 import { CartContext } from "@/cart-provide";
+import { CartUi } from "./buttons";
 
 export function NavHeader() {
   const pathname = usePathname();
-  const { items, displayCart, setDisplayCart }: any = useContext(CartContext);
+  const { cart, displayCart, setDisplayCart }: any = useContext(CartContext);
   // const cart = localStorage.getItem("cart");
   // console.log(cart);
-  let value = useRef<{ name: string; price: number }[]>();
+  // let value = useRef<{ name: string; price: number; qty: number }[]>();
 
-  try {
-    value.current = JSON.parse(localStorage.getItem("cart") || "");
-  } catch (error) {}
+  // try {
+  //   value.current = JSON.parse(localStorage.getItem("cart") || "");
+  // } catch (error) {}
 
   return (
     <nav className="bg-primary-very-dark">
@@ -44,13 +45,13 @@ export function NavHeader() {
               className="w-auto h-auto cursor-pointer"
               onClick={() => setDisplayCart(!displayCart)!}
             />
-            {value && (
+            {/* {value.current && (
               <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                 <span className="text-[10px] text-secondary-white font-bold">
                   {value.current?.length}
                 </span>
               </div>
-            )}
+            )} */}
           </div>
         </div>
 
@@ -111,15 +112,16 @@ export function NavHeader() {
               width={23}
               height={20}
               className="w-auto h-auto cursor-pointer"
-              onClick={() => setDisplayCart(!displayCart)!}
+              onClick={() => setDisplayCart(!displayCart)}
             />
-            {value && (
+            {
               <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                 <span className="text-[10px] text-secondary-white font-bold">
-                  {value.current?.length}
+                  {}
                 </span>
               </div>
-            )}
+            }
+            {/* <CartUi /> */}
           </div>
         </div>
       </header>
