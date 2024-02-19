@@ -50,7 +50,7 @@ export function ButtonThree({ href }: { href: string }) {
 export function ButtonFour({ href }: { href: string }) {
   return (
     <Link href={href}>
-      <button className="h-12 w-40 hover:border bg-secondary-dark tracking-[1px] hover:bg-none leading-normal hover:text-primary-very-dark text-secondary-white font-bold text-sm">
+      <button className="h-12 w-40 hover:border bg-secondary-dark tracking-[1px] hover:bg-none leading-normal hover:bg-primary-very-dark text-secondary-white font-bold text-sm">
         SEE PRODUCT
       </button>
     </Link>
@@ -101,10 +101,21 @@ export function QuantityButton({
 }
 
 export function CheckoutButton() {
+  let value = useRef<{ name: string; price: number; qty: number }[]>();
+  const { setDisplayCart, displayCart }: any = useContext(CartContext);
+
+  try {
+    value.current = JSON.parse(localStorage.getItem("cart") || "");
+  } catch (error) {}
+
   return (
     <Link href="/checkout">
       <div className="mx-7 pb-[31px]">
-        <button className="h-12 w-[100%]  bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
+        <button
+          disabled={value.current ? false : true}
+          onClick={() => setDisplayCart(!displayCart)}
+          className="h-12 w-[100%]  bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
+        >
           CHECKOUT
         </button>
       </div>
@@ -139,23 +150,7 @@ export function AddToCart({ name, price }: { name: string; price: number }) {
       onClick={handleClick}
       className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
     >
-      ADD TO CARD
+      ADD TO CART
     </button>
-  );
-}
-
-export async function CartUi() {
-  let value = useRef<{ name: string; price: number }[]>();
-
-  try {
-    value.current = JSON.parse(localStorage.getItem("cart") || "");
-  } catch (error) {}
-
-  return (
-    <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
-      <span className="text-[10px] text-secondary-white font-bold">
-        {value.current?.length}
-      </span>
-    </div>
   );
 }

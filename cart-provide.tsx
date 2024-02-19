@@ -13,6 +13,11 @@ export default function CartProvider({
   const [quantity, setQuantity] = useState<Number>(1);
   const [displayCart, setDisplayCart] = useState<boolean>(false);
 
+  let value = useRef<{ name: string; price: number; qty: number }[]>();
+
+  // try {
+  //   value.current = JSON.parse(localStorage.getItem("cart") || "");
+  // } catch (error) {}
   return (
     <CartContext.Provider
       value={{

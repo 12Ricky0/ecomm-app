@@ -3,13 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useFormState } from "react-dom";
 import { handleUserData } from "@/libs/action";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Checkout() {
-  const initialState = { message: null, errors: {} };
   let value = useRef<{ name: string; price: number; qty: number }[]>();
 
-  // const [state, dispatch] = useFormState(handleUserData, initialState);
   let total = 0;
   const itemName = {
     "yx1-earphones": "yx1",
@@ -19,17 +17,22 @@ export default function Checkout() {
     "xx99-mark-two-headphones": "xx99 mk II",
     "zx9-speaker": "zx9",
   };
-  try {
-    value.current = JSON.parse(localStorage.getItem("cart") || "");
-  } catch (error) {}
+
+  useEffect(() => {
+    try {
+      value.current = JSON.parse(localStorage.getItem("cart") || "");
+    } catch (error) {}
+  }, []);
 
   value.current && value.current.map((c: any) => (total += c.price * c.qty));
   let vat = (total * 10) / 100;
 
+  const [isChecked, setIsChecked] = useState(false);
+
   return (
     <section className="mx-6 md:mx-[40px] lg:mx-[165px] lg:flex justify-between items-start">
       <form
-        action={handleUserData}
+        action=""
         className="text-[14px] font-bold lg:w-[100%] caret-primary-brown"
       >
         <div>
@@ -59,11 +62,12 @@ export default function Checkout() {
                 Name
               </label>
               <input
-                className="border-solid border outline-primary-brown border-primary-gray rounded-lg w-[100%] py-[18px] bg-secondary-white pl-6 "
+                className="border-solid border required:border-red-500 outline-primary-brown border-primary-gray rounded-lg w-[100%] py-[18px] bg-secondary-white pl-6 "
                 id="name"
                 type="text"
                 name="name"
                 placeholder="Alexei Ward"
+                required
               />
             </div>
             <div>
@@ -175,68 +179,86 @@ export default function Checkout() {
               Payment Method
             </label>
             <div id="payment">
-              <div className="border-solid border rounded-lg h-[56px] hover:border-primary-brown cursor-pointer flex items-center md:w-[309px] border-primary-gray">
+              <div
+                className={`border-solid border rounded-lg h-[56px] hover:border-primary-brown ${
+                  isChecked ? "border-primary-brown" : "border-primary-gray"
+                } cursor-pointer flex items-center md:w-[309px] `}
+              >
                 <input
-                  className="mx-4 cursor-pointer bg-primary-brown"
+                  className="mx-4 cursor-pointer w-[20px] h-[20px] "
                   type="radio"
+                  checked={isChecked}
+                  onChange={() => setIsChecked(!isChecked)}
                 />
                 <label className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]">
                   e-Money
                 </label>
               </div>
-              <div className="border-solid border rounded-lg h-[56px] hover:border-primary-brown cursor-pointer flex mt-4 mb-8 items-center border-primary-gray">
-                <input className="mx-4 cursor-pointer" type="radio" />
+              <div
+                className={`border-solid border rounded-lg h-[56px] hover:border-primary-brown cursor-pointer flex mt-4 mb-8 items-center ${
+                  !isChecked ? "border-primary-brown" : "border-primary-gray"
+                } `}
+              >
+                <input
+                  className="mx-4 cursor-pointer w-[20px] h-[20px] checked:ring-primary-brown focus:ring-primary-brown "
+                  type="radio"
+                  checked={!isChecked}
+                  onChange={() => setIsChecked(!isChecked)}
+                />
                 <label className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]">
                   Cash on Delivery
                 </label>
               </div>
             </div>
           </div>
-          <div className="lg:mx-12 mx-6 md:mx-7 md:grid grid-cols-2 gap-4">
-            <div>
-              <label
-                className="block text-[12px] text-secondary-dark font-bold leading-normal tracking-[-0.21px] mb-[9px] "
-                htmlFor="e-money"
-              >
-                e-Money Number
-              </label>
-              <input
-                className="border-solid border outline-primary-brown border-primary-gray rounded-lg w-[100%] py-[18px] bg-secondary-white pl-6 "
-                id="e-money"
-                type="number"
-                placeholder="238521993"
-              />
+          {isChecked ? (
+            <div className="lg:mx-12 mx-6 md:mx-7 md:grid grid-cols-2 gap-4">
+              <div>
+                <label
+                  className="block text-[12px] text-secondary-dark font-bold leading-normal tracking-[-0.21px] mb-[9px] "
+                  htmlFor="e-money"
+                >
+                  e-Money Number
+                </label>
+                <input
+                  className="border-solid border outline-primary-brown border-primary-gray rounded-lg w-[100%] py-[18px] bg-secondary-white pl-6 "
+                  id="e-money"
+                  type="number"
+                  placeholder="238521993"
+                />
+              </div>
+              <div>
+                <label
+                  className="block text-[12px] text-secondary-dark font-bold leading-normal tracking-[-0.21px] mb-[9px] mt-6 md:mt-0"
+                  htmlFor="pin"
+                >
+                  e-Money Pin
+                </label>
+                <input
+                  className="border-solid border outline-primary-brown border-primary-gray rounded-lg w-[100%] py-[18px] bg-secondary-white pl-6 "
+                  id="pin"
+                  type="number"
+                  placeholder="6891"
+                />
+              </div>
             </div>
-            <div>
-              <label
-                className="block text-[12px] text-secondary-dark font-bold leading-normal tracking-[-0.21px] mb-[9px] mt-6 md:mt-0"
-                htmlFor="pin"
-              >
-                e-Money Pin
-              </label>
-              <input
-                className="border-solid border outline-primary-brown border-primary-gray rounded-lg w-[100%] py-[18px] bg-secondary-white pl-6 "
-                id="pin"
-                type="number"
-                placeholder="6891"
+          ) : (
+            <div className="lg:mx-12 md:mx-7 mx-6 md:flex gap-8 items-center mt-[30px]">
+              <Image
+                src="/assets/checkout/icon-cash-on-delivery.svg"
+                alt="headphone"
+                width={84}
+                height={104}
+                className=" w-auto h-auto rounded-lg"
               />
+              <p className="text-md font-medium leading-[25px] opacity-50">
+                The ‘Cash on Delivery’ option enables you to pay in cash when
+                our delivery courier arrives at your residence. Just make sure
+                your address is correct so that your order will not be
+                cancelled.
+              </p>
             </div>
-          </div>
-
-          <div className="lg:mx-12 md:mx-7 mx-6 md:flex gap-8 items-center mt-[30px]">
-            <Image
-              src="/assets/checkout/icon-cash-on-delivery.svg"
-              alt="headphone"
-              width={84}
-              height={104}
-              className=" w-auto h-auto rounded-lg"
-            />
-            <p className="text-md font-medium leading-[25px] opacity-50">
-              The ‘Cash on Delivery’ option enables you to pay in cash when our
-              delivery courier arrives at your residence. Just make sure your
-              address is correct so that your order will not be cancelled.
-            </p>
-          </div>
+          )}
         </fieldset>
         <button
           type="submit"

@@ -9,7 +9,7 @@ import Cart from "../modal/cart";
 
 export default function HomeHeader() {
   const pathname = usePathname();
-  const { displayCart, setDisplayCart }: any = useContext(CartContext);
+  const { displayCart, setDisplayCart, cart }: any = useContext(CartContext);
   let value = useRef<{ name: string; price: number }[]>();
 
   try {
@@ -44,13 +44,13 @@ export default function HomeHeader() {
                 className="w-auto h-auto hover:outline-dashed outline-primary-brown"
                 onClick={() => setDisplayCart(!displayCart)}
               />
-              {value && (
+              {
                 <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                   <span className="text-[10px] text-secondary-white font-bold">
-                    {value.current?.length}
+                    {cart.length}
                   </span>
                 </div>
-              )}
+              }
             </div>
           </div>
 
@@ -115,13 +115,13 @@ export default function HomeHeader() {
                 className="w-auto h-auto active:outline-dashed outline-primary-brown cursor-pointer"
                 onClick={() => setDisplayCart(!displayCart)!}
               />
-              {value.current && (
+              {
                 <article className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                   <p className="text-[10px] text-secondary-white font-bold">
-                    {value.current?.length}
+                    {cart.length}
                   </p>
                 </article>
-              )}
+              }
             </div>
           </div>
         </nav>

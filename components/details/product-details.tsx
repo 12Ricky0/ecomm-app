@@ -85,10 +85,11 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               FEATURES
             </h1>
             <p className="opacity-50 mt-6 leading-[25px] text-secondary-dark text-md font-medium text-left">
-              {detailedProduct?.features.slice(0, 354)}
+              {/* {detailedProduct?.features.slice(0, 354)}
               <br />
               <br />
-              {detailedProduct?.features.slice(355, 763)}
+              {detailedProduct?.features.slice(355, 763)} */}
+              {detailedProduct?.features}
             </p>
           </article>
           <article className="lg:mx-[120px] md:inline-flex justify-between lg:mt-[88px] md:mt-[120px] lg:block">

@@ -39,14 +39,8 @@ export type State = {
   message?: string | null;
 };
 
-export async function handleUserData(formData: FormData) {
-  const rawFormData = Object.fromEntries(formData.entries());
-  console.log(rawFormData);
+export async function handleUserData(preState: any, formData: FormData) {
+  const rawFormData = Object.fromEntries(formData?.entries());
+  const email = formData?.get("email");
+  console.log(email);
 }
-
-// export async function getDataFromLocalStorage() {
-//   try {
-//     let data = JSON.parse(localStorage.getItem("cart") || "");
-//     return data;
-//   } catch (error) {}
-// }
