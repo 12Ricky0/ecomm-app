@@ -3,10 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useFormState } from "react-dom";
 import { handleUserData } from "@/libs/action";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
+import { CartContext } from "@/cart-provide";
 
 export default function Checkout() {
-  let value = useRef<{ name: string; price: number; qty: number }[]>();
+  // let value = useRef<{ name: string; price: number; qty: number }[]>();
+  const { cart }: any = useContext(CartContext);
 
   let total = 0;
   const itemName = {
@@ -18,13 +20,13 @@ export default function Checkout() {
     "zx9-speaker": "zx9",
   };
 
-  useEffect(() => {
-    try {
-      value.current = JSON.parse(localStorage.getItem("cart") || "");
-    } catch (error) {}
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     value.current = JSON.parse(localStorage.getItem("cart") || "");
+  //   } catch (error) {}
+  // }, [value]);
 
-  value.current && value.current.map((c: any) => (total += c.price * c.qty));
+  cart && cart.map((c: any) => (total += c.price * c.qty));
   let vat = (total * 10) / 100;
 
   const [isChecked, setIsChecked] = useState(false);
@@ -184,12 +186,19 @@ export default function Checkout() {
                   isChecked ? "border-primary-brown" : "border-primary-gray"
                 } cursor-pointer flex items-center md:w-[309px] `}
               >
-                <input
-                  className="mx-4 cursor-pointer w-[20px] h-[20px] "
-                  type="radio"
-                  checked={isChecked}
-                  onChange={() => setIsChecked(!isChecked)}
-                />
+                <div>
+                  <input
+                    className="mx-4 cursor-pointer w-[20px] h-[20px] appearance-none  border border-[#cfcfcf] rounded-[50%] p-[5px]"
+                    type="radio"
+                    checked={isChecked}
+                    onChange={() => setIsChecked(!isChecked)}
+                  />
+                  <div
+                    className={`w-[10px] h-[10px] bg-primary-brown rounded-[50%] ${
+                      isChecked ? "absolute" : "hidden"
+                    }  translate-x-[20.7px] -translate-y-5 `}
+                  />
+                </div>
                 <label className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]">
                   e-Money
                 </label>
@@ -199,12 +208,19 @@ export default function Checkout() {
                   !isChecked ? "border-primary-brown" : "border-primary-gray"
                 } `}
               >
-                <input
-                  className="mx-4 cursor-pointer w-[20px] h-[20px] checked:ring-primary-brown focus:ring-primary-brown "
-                  type="radio"
-                  checked={!isChecked}
-                  onChange={() => setIsChecked(!isChecked)}
-                />
+                <div>
+                  <input
+                    className="mx-4 cursor-pointer w-[20px] h-[20px] appearance-none  border border-[#cfcfcf] rounded-[50%] p-[5px]"
+                    type="radio"
+                    checked={!isChecked}
+                    onChange={() => setIsChecked(!isChecked)}
+                  />
+                  <div
+                    className={`w-[10px] h-[10px] bg-primary-brown rounded-[50%] ${
+                      !isChecked ? "absolute" : "hidden"
+                    }  translate-x-[20.7px] -translate-y-5 `}
+                  />
+                </div>
                 <label className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]">
                   Cash on Delivery
                 </label>
@@ -272,8 +288,8 @@ export default function Checkout() {
         <h1 className="font-bold mx-6 pt-8 pb-[8px] leading-normal tracking-[1.29px] text-[18px]">
           SUMMARY
         </h1>
-        {value.current &&
-          value.current.map(
+        {cart &&
+          cart.map(
             (
               value: { name: string; price: number; qty: number },
               index: number

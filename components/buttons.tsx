@@ -56,7 +56,7 @@ export function ButtonFour({ href }: { href: string }) {
     </Link>
   );
 }
-// ("bg-primary-gray flex py-[15px] w-[120px] justify-center");
+
 export function QuantityButton({
   className,
   defaultValue,
@@ -80,19 +80,40 @@ export function QuantityButton({
     <div className={className}>
       <button
         onClick={handleReduce}
-        className="text-secondary-dark w-4 opacity-25 font-bold text-[13px] tracking-[1px] leading-normal"
+        className="text-secondary-dark w-4 hover:text-primary-brown opacity-25 font-bold text-[13px] tracking-[1px] leading-normal"
       >
         -
       </button>
       <span className="px-[20px] text-secondary-dark font-bold text-[13px] tracking-[1px] leading-normal">
-        {displayCart ? defaultValue : quantity}
+        {quantity}
       </span>
       <button
         onClick={() => {
           setQuantity((prevCount: any) => prevCount + 1);
           // localStorage.setItem("quantity", JSON.stringify(quantity));
         }}
-        className="text-secondary-dark opacity-25 font-bold text-[13px] tracking-[1px] w-4 leading-normal"
+        className="text-secondary-dark hover:text-primary-brown opacity-25 font-bold text-[13px] tracking-[1px] w-4 leading-normal"
+      >
+        +
+      </button>
+    </div>
+  );
+}
+
+export function QtyButton2({ quantity }: { quantity: number }) {
+  return (
+    <div className="bg-primary-gray flex py-[7px] w-[96px] justify-center">
+      <button className="text-secondary-dark hover:text-primary-brown w-4 opacity-25 font-bold text-[13px] tracking-[1px] leading-normal">
+        -
+      </button>
+      <span className="px-[20px] text-secondary-dark font-bold text-[13px] tracking-[1px] leading-normal">
+        {quantity}
+      </span>
+      <button
+        // onClick={() => {
+        //   setQuantity((prevCount: any) => prevCount + 1);
+        // }}
+        className="text-secondary-dark hover:text-primary-brown opacity-25 font-bold text-[13px] tracking-[1px] w-4 leading-normal"
       >
         +
       </button>
