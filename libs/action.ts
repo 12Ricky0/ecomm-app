@@ -2,6 +2,7 @@
 import mongoose from "mongoose";
 import Product from "./schema";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function mongoDBConnection() {
   try {
@@ -39,8 +40,8 @@ export type State = {
   message?: string | null;
 };
 
-export async function handleUserData(preState: any, formData: FormData) {
+export async function handleUserData(formData: FormData) {
   const rawFormData = Object.fromEntries(formData?.entries());
-  const email = formData?.get("email");
-  console.log(email);
+  console.log(rawFormData);
+  redirect("/completed");
 }

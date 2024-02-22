@@ -3,6 +3,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { QuantityButton, CheckoutButton, QtyButton2 } from "../buttons";
 import { CartContext } from "@/cart-provide";
+import { Cart } from "@/libs/definitions";
 
 import Overlay from "../overlay";
 export default function Cart() {
@@ -27,7 +28,7 @@ export default function Cart() {
   //   value.current = JSON.parse(localStorage.getItem("cart") || "");
   // } catch (error) {}
 
-  cart && cart.map((c: any) => (total += c.price * c.qty));
+  cart && cart.map((c: Cart) => (total += c.price * c.qty));
   return (
     <Overlay>
       <section className="z-[1000] bg-secondary-white md:w-[377px] overflow-auto lg:mr-[165px] md:mr-10 rounded-lg mx-6 relative md:absolute md:right-0 opacity-100 mt-6">
@@ -51,42 +52,37 @@ export default function Cart() {
             </span>
           </article>
           {cart &&
-            cart.map(
-              (
-                c: { name: string; price: number; qty: number },
-                index: number
-              ) => (
-                <div key={index} className="mb-6">
-                  <article className="flex justif items-center ">
-                    <Image
-                      src={`/assets/cart/image-${c.name}.jpg`}
-                      alt="headephone image"
-                      width={64}
-                      height={64}
-                      className="rounded-lg mb-2 mr-4"
-                      quality={100}
-                    />
-                    <div className="inline-flex justify-between items-center">
-                      <div className="">
-                        <h1 className="font-bold text-md w-[75px] text-secondary-dark leading-[25px]">
-                          {itemName[c.name as keyof typeof itemName]}
-                        </h1>
-                        <span className="font-bold text-[14px] opacity-50 text-secondary-dark leading-[25px]">
-                          $ {new Intl.NumberFormat().format(Number(c.price))}
-                        </span>
-                      </div>
-                      <div className="absolute md:right-[33px] right-[28px]">
-                        {/* <QuantityButton
+            cart.map((c: Cart, index: number) => (
+              <div key={index} className="mb-6">
+                <article className="flex justif items-center ">
+                  <Image
+                    src={`/assets/cart/image-${c.name}.jpg`}
+                    alt="headephone image"
+                    width={64}
+                    height={64}
+                    className="rounded-lg mb-2 mr-4"
+                    quality={100}
+                  />
+                  <div className="inline-flex justify-between items-center">
+                    <div className="">
+                      <h1 className="font-bold text-md w-[75px] text-secondary-dark leading-[25px]">
+                        {itemName[c.name as keyof typeof itemName]}
+                      </h1>
+                      <span className="font-bold text-[14px] opacity-50 text-secondary-dark leading-[25px]">
+                        $ {new Intl.NumberFormat().format(Number(c.price))}
+                      </span>
+                    </div>
+                    <div className="absolute md:right-[33px] right-[28px]">
+                      {/* <QuantityButton
                           defaultValue={Number(c.qty)}
                           className="bg-primary-gray flex py-[7px] w-[96px] justify-center"
                         /> */}
-                        <QtyButton2 quantity={c.qty} />
-                      </div>
+                      <QtyButton2 name={c.name} quantity={c.qty} />
                     </div>
-                  </article>
-                </div>
-              )
-            )}
+                  </div>
+                </article>
+              </div>
+            ))}
           <article className="mt-2 flex justify-between pb-6">
             <span className="cursor-pointer opacity-50 text-secondary-dark font-medium text-md leading-[25px]">
               Total

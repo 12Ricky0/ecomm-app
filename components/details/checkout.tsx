@@ -34,7 +34,7 @@ export default function Checkout() {
   return (
     <section className="mx-6 md:mx-[40px] lg:mx-[165px] lg:flex justify-between items-start">
       <form
-        action=""
+        // action={handleUserData}
         className="text-[14px] font-bold lg:w-[100%] caret-primary-brown"
       >
         <div>
@@ -42,7 +42,9 @@ export default function Checkout() {
             href="/"
             className=" text-secondary-dark opacity-50 font-medium text-md leading-[25px] "
           >
-            <p className="mt-4 lg:mt-[80px] md:mt-[33px]">Go Back</p>
+            <p className="mt-4 inline-block lg:mt-[80px] md:mt-[33px]">
+              Go Back
+            </p>
           </Link>
         </div>
 
@@ -259,7 +261,7 @@ export default function Checkout() {
               </div>
             </div>
           ) : (
-            <div className="lg:mx-12 md:mx-7 mx-6 md:flex gap-8 items-center mt-[30px]">
+            <div className="lg:mx-12 md:mx-7 mx-6 flex gap-8 items-center mt-[30px]">
               <Image
                 src="/assets/checkout/icon-cash-on-delivery.svg"
                 alt="headphone"
@@ -276,12 +278,14 @@ export default function Checkout() {
             </div>
           )}
         </fieldset>
-        <button
-          type="submit"
-          className="h-12 w-[100%] mt-[32px] bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
-        >
-          CONTINUE & PAY
-        </button>
+        <Link href="/checkout/completed">
+          <button
+            type="submit"
+            className="h-12 w-[100%] mt-[32px] bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
+          >
+            CONTINUE & PAY
+          </button>
+        </Link>
       </form>
 
       <article className="bg-secondary-white mx- rounded-lg pb-[32px] lg:ml-[30px] mt-8 lg:mt-[145px] shrink-0 lg:w-[350px]">

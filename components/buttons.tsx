@@ -100,19 +100,58 @@ export function QuantityButton({
   );
 }
 
-export function QtyButton2({ quantity }: { quantity: number }) {
+export function QtyButton2({
+  quantity,
+  name,
+}: {
+  quantity: number;
+  name: string;
+}) {
+  const { cart, setCart }: any = useContext(CartContext);
+  const updatedCart = [...cart];
+
+  const [count, setCount] = useState(quantity);
+
+  function handleIncrease() {
+    const updatedCart = [...cart];
+    const existingItemIndex = updatedCart.findIndex(
+      (item: any) => item.name === name
+    );
+
+    if (existingItemIndex !== -1) {
+      // If the item already exists in the cart, update its quantity
+      updatedCart[existingItemIndex].qty += 1;
+      setCount(count + 1);
+    }
+  }
+
+  function handleDecrease() {
+    const updatedCart = [...cart];
+    const existingItemIndex = updatedCart.findIndex(
+      (item: any) => item.name === name
+    );
+
+    if (existingItemIndex !== -1) {
+      // If the item already exists in the cart, update its quantity
+      if (quantity > 1) {
+        updatedCart[existingItemIndex].qty -= 1;
+        setCount(count - 1);
+      }
+    }
+  }
   return (
     <div className="bg-primary-gray flex py-[7px] w-[96px] justify-center">
-      <button className="text-secondary-dark hover:text-primary-brown w-4 opacity-25 font-bold text-[13px] tracking-[1px] leading-normal">
+      <button
+        onClick={handleDecrease}
+        className="text-secondary-dark hover:text-primary-brown w-4 opacity-25 font-bold text-[13px] tracking-[1px] leading-normal"
+      >
         -
       </button>
       <span className="px-[20px] text-secondary-dark font-bold text-[13px] tracking-[1px] leading-normal">
-        {quantity}
+        {count}
       </span>
       <button
-        // onClick={() => {
-        //   setQuantity((prevCount: any) => prevCount + 1);
-        // }}
+        onClick={handleIncrease}
         className="text-secondary-dark hover:text-primary-brown opacity-25 font-bold text-[13px] tracking-[1px] w-4 leading-normal"
       >
         +
@@ -157,13 +196,8 @@ export function AddToCart({ name, price }: { name: string; price: number }) {
         ...prevData,
         { name: name, price: price, qty: quantity },
       ]);
-      // setItems(updatedCart.length);
       localStorage.setItem("cart", JSON.stringify(updatedCart));
-      // console.log(cart);
-      // setQuantity(1);
     }
-    // items.add(query);
-    // setCart(items.size);
   }
 
   return (
