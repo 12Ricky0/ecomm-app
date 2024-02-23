@@ -31,7 +31,8 @@ export default function CheckoutModal() {
 
   return (
     <Overlay>
-      <div className="w-[100%] mt-[60px] flex justify-center flex-row ">
+      <h1>Hello</h1>
+      {/* <div className="w-[100%] mt-[60px] flex justify-center flex-row ">
         <section className="bg-secondary-white absolute overflow-auto mx-6 rounded-lg">
           <article className="mx-8 lg:mx-12">
             <div className="mt-8">
@@ -116,7 +117,7 @@ export default function CheckoutModal() {
             </Link>
           </article>
         </section>
-      </div>
+      </div> */}
     </Overlay>
   );
 }

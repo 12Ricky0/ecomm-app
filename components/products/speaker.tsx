@@ -9,11 +9,10 @@ export default async function Speakers() {
 
   let data: any[] = response.res;
 
-  let product = data.filter((d) => d.category === "speakers");
+  let product = data?.filter((d) => d.category === "speakers");
   return (
     <section className="mx-6 md:mx-0">
-      {product.map((item) => (
-        // <section key={item.id} className="mb-[120px]">
+      {product?.map((item) => (
         <section
           key={item._id}
           className="lg:flex md:mx-[40px] lg:mx-[165px] even:flex-row-reverse justify-between items-center first:mt-[120px] lg:first:mt-[160px] lg:mb-[160px] mb-[120px]"
@@ -58,7 +57,6 @@ export default async function Speakers() {
             </article>
           </article>
         </section>
-        // </section>
       ))}
       <MixedProduct />
       <ProductFooter />

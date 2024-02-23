@@ -10,10 +10,10 @@ export default async function Headphones() {
 
   let data: any[] = response.res;
 
-  const product = data.filter((d) => d.category === "headphones");
+  const product = data?.filter((d) => d.category === "headphones");
   return (
     <section className="mx-6 md:mx-0">
-      {product.map((item) => (
+      {product?.map((item) => (
         // <section key={item.id} className="mb-[120px]">
         <section
           key={item._id}

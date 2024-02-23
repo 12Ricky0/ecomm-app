@@ -5,17 +5,35 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Cart from "./modal/cart";
 import { CartContext } from "@/cart-provide";
+import { getCookies } from "@/libs/action";
+import { CartType } from "@/libs/definitions";
 
 export function NavHeader() {
   const pathname = usePathname();
-  const { cart, displayCart, setDisplayCart }: any = useContext(CartContext);
+  const { displayCart, setDisplayCart }: any = useContext(CartContext);
   // const cart = localStorage.getItem("cart");
   // console.log(cart);
-  let value = useRef<{ name: string; price: number; qty: number }[]>();
+  const [cart, setCart] = useState<CartType[]>([]);
 
-  // try {
-  //   value.current = JSON.parse(localStorage.getItem("cart") || "");
-  // } catch (error) {}
+  useEffect(() => {
+    getCookies()
+      .then((data) => {
+        setCart(data);
+      })
+      .catch((error) => {
+        console.error(error); // Handle any errors
+      });
+  }, []);
+  // useEffect(() => {
+  //   getCookies()
+  //     .then((data) => {
+  //       cart.current = data;
+  //       console.log(data); // Do something with the data
+  //     })
+  //     .catch((error) => {
+  //       console.error(error); // Handle any errors
+  //     });
+  // });
 
   return (
     <nav className="bg-primary-very-dark">
@@ -47,7 +65,7 @@ export function NavHeader() {
             {
               <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                 <span className="text-[10px] text-secondary-white font-bold">
-                  {cart.length}
+                  {cart?.length}
                 </span>
               </div>
             }
@@ -116,7 +134,7 @@ export function NavHeader() {
             {
               <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                 <span className="text-[10px] text-secondary-white font-bold">
-                  {cart.length}
+                  {cart?.length}
                 </span>
               </div>
             }

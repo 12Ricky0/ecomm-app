@@ -5,7 +5,7 @@ import { ButtonOne, QuantityButton, AddToCart } from "../buttons";
 import MixedProduct from "../mixed-product";
 import ProductFooter from "../product-footer";
 import { productDetails } from "@/libs/action";
-import { create } from "@/libs/action";
+// import { create } from "@/libs/action";
 
 export default async function ProductDetails({ slug }: { slug: string }) {
   const req = await productDetails(slug);

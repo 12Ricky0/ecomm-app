@@ -6,15 +6,16 @@ import { usePathname } from "next/navigation";
 import { useContext, useState, useRef } from "react";
 import { CartContext } from "@/cart-provide";
 import Cart from "../modal/cart";
+import { CartType } from "@/libs/definitions";
 
-export default function HomeHeader() {
+export default function HomeHeader({ cart }: { cart: CartType[] }) {
   const pathname = usePathname();
-  const { displayCart, setDisplayCart, cart }: any = useContext(CartContext);
-  let value = useRef<{ name: string; price: number }[]>();
+  const { displayCart, setDisplayCart }: any = useContext(CartContext);
+  // let value = useRef<{ name: string; price: number }[]>();
 
-  try {
-    value.current = JSON.parse(localStorage.getItem("cart") || "");
-  } catch (error) {}
+  // try {
+  //   value.current = JSON.parse(localStorage.getItem("cart") || "");
+  // } catch (error) {}
 
   return (
     <section className="bg-headphone-mob lg:flex flex-col lg:bg-headphone-desktop md:bg-headphone-tablet bg-cover pb-[112px] md:pb-[250px] md:mb-[50px] lg:mb-[100px] text-center bg-center">
@@ -47,7 +48,7 @@ export default function HomeHeader() {
               {
                 <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                   <span className="text-[10px] text-secondary-white font-bold">
-                    {cart.length}
+                    {cart?.length}
                   </span>
                 </div>
               }
@@ -118,7 +119,7 @@ export default function HomeHeader() {
               {
                 <article className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
                   <p className="text-[10px] text-secondary-white font-bold">
-                    {cart.length}
+                    {cart?.length}
                   </p>
                 </article>
               }

@@ -1,9 +1,9 @@
 "use client";
-import { useState, useContext, useRef } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { create } from "@/libs/action";
 import { CartContext } from "@/cart-provide";
+import { setCookies, storedCookie } from "@/libs/action";
 
 export function ButtonOne({ href }: { href: string }) {
   return (
@@ -164,6 +164,8 @@ export function CheckoutButton() {
   let value = useRef<{ name: string; price: number; qty: number }[]>();
   const { setDisplayCart, displayCart }: any = useContext(CartContext);
 
+  let val = storedCookie();
+
   try {
     value.current = JSON.parse(localStorage.getItem("cart") || "");
   } catch (error) {}
@@ -196,7 +198,8 @@ export function AddToCart({ name, price }: { name: string; price: number }) {
         ...prevData,
         { name: name, price: price, qty: quantity },
       ]);
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      // localStorage.setItem("cart", JSON.stringify(updatedCart));
+      setCookies(updatedCart);
     }
   }
 

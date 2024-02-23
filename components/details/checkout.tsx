@@ -32,7 +32,7 @@ export default function Checkout() {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <section className="mx-6 md:mx-[40px] lg:mx-[165px] lg:flex justify-between items-start">
+    <section className="mx-6 md:mx-[40px] lg:mx-[165px] lg:flex justify-between overflow-hidden items-start">
       <form
         // action={handleUserData}
         className="text-[14px] font-bold lg:w-[100%] caret-primary-brown"

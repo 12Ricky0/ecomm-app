@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import Product from "./schema";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { CartType } from "./definitions";
 
 export async function mongoDBConnection() {
   try {
@@ -24,11 +25,28 @@ export async function productDetails(query: string) {
   }
 }
 
-export async function create(data: string) {
+export async function setCookies(data: CartType[]) {
   cookies().set({
     name: "item",
-    value: data,
+    value: JSON.stringify(data),
   });
+}
+export async function getCookies() {
+  try {
+    let cookieStore = JSON.parse(cookies().getAll("item")[0].value);
+    return cookieStore;
+  } catch (error) {}
+}
+
+export async function deleteCookie() {
+  try {
+    cookies().delete("item");
+  } catch (error) {}
+}
+export async function storedCookie() {
+  try {
+    cookies().has("item");
+  } catch (error) {}
 }
 
 export type State = {

@@ -3,11 +3,12 @@ import { useContext, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { QuantityButton, CheckoutButton, QtyButton2 } from "../buttons";
 import { CartContext } from "@/cart-provide";
-import { Cart } from "@/libs/definitions";
+import { CartType } from "@/libs/definitions";
+import { getCookies, deleteCookie } from "@/libs/action";
 
 import Overlay from "../overlay";
 export default function Cart() {
-  const { cart, items, setCart, setItems, displayCart, setDisplayCart }: any =
+  const { items, setItems, displayCart, setDisplayCart }: any =
     useContext(CartContext);
   let total = 0;
   const itemName = {
@@ -19,6 +20,18 @@ export default function Cart() {
     "zx9-speaker": "zx9",
   };
 
+  const [cart, setCart] = useState<CartType[]>([]);
+
+  useEffect(() => {
+    getCookies()
+      .then((data) => {
+        setCart(data);
+      })
+      .catch((error) => {
+        console.error(error); // Handle any errors
+      });
+  }, []);
+
   // const [cartContent, setCartContent] = useState<
   //   { name: string; price: number }[]
   // >([]);
@@ -28,7 +41,7 @@ export default function Cart() {
   //   value.current = JSON.parse(localStorage.getItem("cart") || "");
   // } catch (error) {}
 
-  cart && cart.map((c: Cart) => (total += c.price * c.qty));
+  cart && cart.map((c: CartType) => (total += c.price * c.qty));
   return (
     <Overlay>
       <section className="z-[1000] bg-secondary-white md:w-[377px] overflow-auto lg:mr-[165px] md:mr-10 rounded-lg mx-6 relative md:absolute md:right-0 opacity-100 mt-6">
@@ -42,8 +55,8 @@ export default function Cart() {
             </h1>
             <span
               onClick={() => {
-                setCart("");
-                localStorage.removeItem("cart");
+                deleteCookie();
+                // localStorage.removeItem("cart");
                 setDisplayCart(!displayCart);
               }}
               className="cursor-pointer underline opacity-50 hover:text-primary-brown hover:opacity-100 text-secondary-dark font-medium text-md leading-[25px]"
@@ -52,7 +65,7 @@ export default function Cart() {
             </span>
           </article>
           {cart &&
-            cart.map((c: Cart, index: number) => (
+            cart.map((c: CartType, index: number) => (
               <div key={index} className="mb-6">
                 <article className="flex justif items-center ">
                   <Image
