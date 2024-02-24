@@ -12,7 +12,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div>
-      <NavHeader />
       <ProductDetails slug={slug} />
       <Footer />
     </div>

@@ -7,10 +7,12 @@ import { useContext, useState, useRef } from "react";
 import { CartContext } from "@/cart-provide";
 import Cart from "../modal/cart";
 import { CartType } from "@/libs/definitions";
+import Menu from "../modal/menu";
 
 export default function HomeHeader({ cart }: { cart: CartType[] }) {
   const pathname = usePathname();
-  const { displayCart, setDisplayCart }: any = useContext(CartContext);
+  const { displayCart, setDisplayCart, displayMenu, setDisplayMenu }: any =
+    useContext(CartContext);
   // let value = useRef<{ name: string; price: number }[]>();
 
   // try {
@@ -28,6 +30,7 @@ export default function HomeHeader({ cart }: { cart: CartType[] }) {
               width={16}
               height={15}
               className="w-auto h-auto"
+              onClick={() => setDisplayMenu(!displayMenu)}
             />
             <Image
               src="/assets/shared/desktop/logo.svg"
@@ -127,6 +130,7 @@ export default function HomeHeader({ cart }: { cart: CartType[] }) {
           </div>
         </nav>
         {displayCart && <Cart />}
+        {displayMenu && <Menu />}
       </header>
 
       <article className="lg:translate-y-[40%]">

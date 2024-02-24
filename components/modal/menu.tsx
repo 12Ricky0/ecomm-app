@@ -5,7 +5,7 @@ import { ButtonThree } from "../buttons";
 
 export default function Menu() {
   return (
-    <section className="absolute overflow-y-auto">
+    <section className="absolute overflow-y-auto lg:hidden">
       <Overlay>
         <section className="md:grid gap-[30px] md:gap-[10px] lg:gap-[30px]  justify-center grid-cols-3 overflow-scroll shrink-0 bg-secondary-white pb-[35px]">
           <div className="rounded-lg mt-[100px] relative pb-[22px] text-center mx-6 md:mx-0 md:ml-6  text-secondary-dark font-bold text-md tracking-[1.07px] bg-primary-gray ">

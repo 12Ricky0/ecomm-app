@@ -61,5 +61,5 @@ export type State = {
 export async function handleUserData(formData: FormData) {
   const rawFormData = Object.fromEntries(formData?.entries());
   console.log(rawFormData);
-  redirect("/completed");
+  redirect("/checkout/completed");
 }

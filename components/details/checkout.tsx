@@ -5,10 +5,11 @@ import { useFormState } from "react-dom";
 import { handleUserData } from "@/libs/action";
 import { useEffect, useRef, useState, useContext } from "react";
 import { CartContext } from "@/cart-provide";
+import { CartType } from "@/libs/definitions";
 
-export default function Checkout() {
+export default function Checkout({ cart }: { cart: CartType[] }) {
   // let value = useRef<{ name: string; price: number; qty: number }[]>();
-  const { cart }: any = useContext(CartContext);
+  // const { cart }: any = useContext(CartContext);
 
   let total = 0;
   const itemName = {
@@ -26,16 +27,19 @@ export default function Checkout() {
   //   } catch (error) {}
   // }, [value]);
 
-  cart && cart.map((c: any) => (total += c.price * c.qty));
+  cart && cart.map((c: CartType) => (total += c.price * c.qty));
   let vat = (total * 10) / 100;
 
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <section className="mx-6 md:mx-[40px] lg:mx-[165px] lg:flex justify-between overflow-hidden items-start">
-      <form
+    <form
+      className="mx-6 md:mx-[40px] lg:mx-[165px] lg:flex justify-between overflow-hidden items-start text-[14px] caret-primary-brown"
+      action={handleUserData}
+    >
+      <section
         // action={handleUserData}
-        className="text-[14px] font-bold lg:w-[100%] caret-primary-brown"
+        className="text-[14px] font-bold lg:w-[100%] "
       >
         <div>
           <Link
@@ -278,15 +282,7 @@ export default function Checkout() {
             </div>
           )}
         </fieldset>
-        <Link href="/checkout/completed">
-          <button
-            type="submit"
-            className="h-12 w-[100%] mt-[32px] bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
-          >
-            CONTINUE & PAY
-          </button>
-        </Link>
-      </form>
+      </section>
 
       <article className="bg-secondary-white mx- rounded-lg pb-[32px] lg:ml-[30px] mt-8 lg:mt-[145px] shrink-0 lg:w-[350px]">
         <h1 className="font-bold mx-6 pt-8 pb-[8px] leading-normal tracking-[1.29px] text-[18px]">
@@ -307,7 +303,7 @@ export default function Checkout() {
                   className=" w-auto h-auto ml-6 rounded-lg mt-6"
                   quality={100}
                 />
-                <div className="mr-6 md:mr-0 md:ml-4 flex justify-between items-center">
+                <div className="mr-6 md:mr-0 ml-4 flex justify-between items-center">
                   <div>
                     <h1 className="font-bold text-[15px] text-secondary-dark mr-[70px] inline-block leading-[25px] ">
                       {itemName[value.name as keyof typeof itemName]}
@@ -316,7 +312,7 @@ export default function Checkout() {
                       $ {new Intl.NumberFormat().format(Number(value.price))}
                     </p>
                   </div>
-                  <h1 className="font-bold md:mr-6  text-[15px] text-secondary-dark leading-[25px] inline-block opacity-50 ">
+                  <h1 className="font-bold md:mr-6 absolute lg:right-[165px] right-[48px] text-[15px] text-secondary-dark leading-[25px] inline-block opacity-50 ">
                     X{value.qty}
                   </h1>
                 </div>
@@ -341,8 +337,17 @@ export default function Checkout() {
               </h1>
             </article>
           </article>
+          {/* <Link href="/checkout/completed"> */}
+          <button
+            disabled={cart ? false : true}
+            type="submit"
+            className="h-12 w-[100%] mt-[32px] bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
+          >
+            CONTINUE & PAY
+          </button>
+          {/* </Link> */}
         </div>
       </article>
-    </section>
+    </form>
   );
 }

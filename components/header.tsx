@@ -7,23 +7,25 @@ import Cart from "./modal/cart";
 import { CartContext } from "@/cart-provide";
 import { getCookies } from "@/libs/action";
 import { CartType } from "@/libs/definitions";
+import Menu from "./modal/menu";
 
-export function NavHeader() {
+export function NavHeader({ cart }: { cart: CartType[] }) {
   const pathname = usePathname();
-  const { displayCart, setDisplayCart }: any = useContext(CartContext);
+  const { displayCart, setDisplayCart, displayMenu, setDisplayMenu }: any =
+    useContext(CartContext);
   // const cart = localStorage.getItem("cart");
   // console.log(cart);
-  const [cart, setCart] = useState<CartType[]>([]);
+  // const [cart, setCart] = useState<CartType[]>([]);
 
-  useEffect(() => {
-    getCookies()
-      .then((data) => {
-        setCart(data);
-      })
-      .catch((error) => {
-        console.error(error); // Handle any errors
-      });
-  }, []);
+  // useEffect(() => {
+  //   getCookies()
+  //     .then((data) => {
+  //       setCart(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error); // Handle any errors
+  //     });
+  // }, []);
   // useEffect(() => {
   //   getCookies()
   //     .then((data) => {
@@ -36,7 +38,7 @@ export function NavHeader() {
   // });
 
   return (
-    <nav className="bg-primary-very-dark">
+    <nav className={`${pathname === "/" && "hidden"} bg-primary-very-dark`}>
       <header className=" h-[90px] md:mx-[40px] lg:mx-[165px] bg-primary-very-dark border-b-secondary-white border-opacity-10 border-b">
         <div className="h-[90px] lg:hidden flex mx-6 md:mx-0 justify-between items-center">
           <Image
@@ -45,14 +47,17 @@ export function NavHeader() {
             width={16}
             height={15}
             className="w-auto h-auto"
+            onClick={() => setDisplayMenu(!displayMenu)}
           />
-          <Image
-            src="/assets/shared/desktop/logo.svg"
-            alt="logo"
-            width={143}
-            height={25}
-            className="w-auto h-auto"
-          />
+          <Link href="/">
+            <Image
+              src="/assets/shared/desktop/logo.svg"
+              alt="logo"
+              width={143}
+              height={25}
+              className="w-auto h-auto"
+            />
+          </Link>
           <div>
             <Image
               src="/assets/shared/desktop/icon-cart.svg"
@@ -60,7 +65,14 @@ export function NavHeader() {
               width={23}
               height={20}
               className="w-auto h-auto cursor-pointer"
-              onClick={() => setDisplayCart(!displayCart)!}
+              onClick={() => {
+                // if (displayCart) {
+                //   document.body.style.overflow = "hidden";
+                // } else {
+                //   document.body.style.overflow = "auto";
+                // }
+                setDisplayCart(!displayCart);
+              }}
             />
             {
               <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
@@ -129,7 +141,12 @@ export function NavHeader() {
               width={23}
               height={20}
               className="w-auto h-auto cursor-pointer"
-              onClick={() => setDisplayCart(!displayCart)}
+              onClick={() => {
+                // displayCart == true &&
+                //   (document.body.style.overflow = "hidden");
+
+                setDisplayCart(!displayCart);
+              }}
             />
             {
               <div className="bg-primary-brown w-5 h-5 absolute flex items-center justify-center rounded-[50%] translate-x-5 -translate-y-9">
@@ -142,6 +159,7 @@ export function NavHeader() {
         </div>
       </header>
       {displayCart && <Cart />}
+      {displayMenu && <Menu />}
     </nav>
   );
 }

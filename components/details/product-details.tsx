@@ -25,20 +25,20 @@ export default async function ProductDetails({ slug }: { slug: string }) {
         </Link>
       </div>
       <section className="mx-6 md:mx-[40px] lg:mx-[165px] lg:mb-[100px] mb-[60px]">
-        <article className="md:flex items-center  justify-between">
+        <article className="md:flex items-center justify-between">
           <Image
             src={detailedProduct?.image.mobile!}
             alt="headephone image"
             width={327}
             height={352}
-            className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
+            className="w-full mt-[24px] md:hidden rounded-lg "
           />
           <Image
             src={detailedProduct?.image.tablet!}
             alt="headephone image"
             width={281}
             height={480}
-            className="w-auto h-auto mt-[24px] hidden lg:hidden md:block rounded-lg "
+            className="w-auto mt-[24px] hidden lg:hidden md:block rounded-lg "
             quality={100}
           />
           <Image
@@ -46,7 +46,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
             alt="headephone image"
             width={540}
             height={560}
-            className=" mr-7 mt-[56px] lg:block hidden rounded-lg "
+            className=" w-auto mr-7 mt-[56px] lg:block hidden rounded-lg "
             quality={100}
           />
           <article className="lg:w-[445px] md:w-[340px]  text-left">
@@ -72,9 +72,6 @@ export default async function ProductDetails({ slug }: { slug: string }) {
                 price={detailedProduct?.price}
                 // qty={}
               />
-              {/* <button className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm">
-                ADD TO CARD
-              </button> */}
             </div>
           </article>
         </article>
@@ -85,10 +82,6 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               FEATURES
             </h1>
             <p className="opacity-50 mt-6 leading-[25px] text-secondary-dark text-md font-medium text-left">
-              {/* {detailedProduct?.features.slice(0, 354)}
-              <br />
-              <br />
-              {detailedProduct?.features.slice(355, 763)} */}
               {detailedProduct?.features}
             </p>
           </article>
@@ -118,24 +111,24 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto md:hidden rounded-lg "
-              priority
+              className="w-full md:hidden rounded-lg "
+              quality={100}
             />
             <Image
               src={detailedProduct?.gallery.second.mobile!}
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
-              priority
+              className="w-full mt-[24px] md:hidden rounded-lg "
+              quality={100}
             />
             <Image
               src={detailedProduct?.gallery.third.mobile!}
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
-              priority
+              className="w-full mt-[24px] md:hidden rounded-lg "
+              quality={100}
             />
           </div>
           {/* Tablet View */}
@@ -146,7 +139,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
                 alt="headephone image"
                 width={445}
                 height={280}
-                className=" rounded-lg "
+                className=" rounded-lg w-full"
                 quality={100}
                 unoptimized={true}
               />
@@ -157,7 +150,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
                 alt="headephone image"
                 width={445}
                 height={280}
-                className="rounded-lg"
+                className="rounded-lg w-full"
                 quality={100}
                 unoptimized={true}
               />
@@ -168,7 +161,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
                 alt="headephone image"
                 width={635}
                 height={592}
-                className="w rounded-lg "
+                className="w rounded-lg w-full"
                 quality={100}
                 // fill={true}
               />
@@ -218,36 +211,36 @@ export default async function ProductDetails({ slug }: { slug: string }) {
           YOU MAY ALSO LIKE
         </h1>
 
-        <div className="mt-[88px] md:mt-[56px] text-center md:flex gap-[30px]">
-          <div>
+        <div className="mt-[88px] md:mt-[56px] text-center md:flex justify-between gap-[30px]">
+          <div className="">
             <Image
               src={detailedProduct?.others[0].image.mobile!}
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
-              priority
+              className="w-full mt-[24px] md:hidden rounded-lg "
+              quality={100}
             />
             <Image
               src={detailedProduct?.others[0].image.tablet!}
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] md:block hidden lg:hidden rounded-lg "
-              priority
+              className="w-full mt-[24px] md:block hidden lg:hidden rounded-lg "
+              quality={100}
             />
             <Image
               src={detailedProduct?.others[0].image.desktop!}
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] hidden lg:block rounded-lg "
-              priority
+              className="w-full mt-[24px] hidden lg:block rounded-lg "
+              quality={100}
             />
             <h1 className="text-[24px] font-bold text-secondary-dark tracking-[0.86px] my-[32px] leading-9">
               {detailedProduct?.others[0].name}
             </h1>
-            <div className="mb-[56px]">
+            <div className="mb-[56px] md:mb-0">
               <ButtonOne href={`/details/${detailedProduct.others[0].slug}`} />
             </div>
           </div>
@@ -257,7 +250,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
+              className="w-full mt-[24px] md:hidden rounded-lg "
               quality={100}
             />
             <Image
@@ -265,8 +258,8 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] md:block hidden lg:hidden rounded-lg "
-              priority
+              className="w-full mt-[24px] md:block hidden lg:hidden rounded-lg "
+              quality={100}
             />
 
             <Image
@@ -274,13 +267,13 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] hidden lg:block rounded-lg "
-              priority
+              className="w-full mt-[24px] hidden lg:block rounded-lg "
+              quality={100}
             />
             <h1 className="text-[24px] font-bold text-secondary-dark tracking-[0.86px] my-[32px] leading-9">
               {detailedProduct?.others[1].name}
             </h1>
-            <div className="mb-[56px]">
+            <div className="mb-[56px] md:mb-0">
               <ButtonOne href={`/details/${detailedProduct.others[1].slug}`} />
             </div>
           </div>
@@ -290,7 +283,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] md:hidden rounded-lg "
+              className="w-full mt-[24px] md:hidden rounded-lg "
               quality={100}
             />
             <Image
@@ -298,8 +291,8 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] md:block hidden lg:hidden rounded-lg "
-              priority
+              className="w-full mt-[24px] md:block hidden lg:hidden rounded-lg "
+              quality={100}
             />
 
             <Image
@@ -307,8 +300,8 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               alt="headephone image"
               width={327}
               height={352}
-              className="w-auto h-auto mt-[24px] hidden lg:block rounded-lg "
-              priority
+              className="w-full mt-[24px] hidden lg:block rounded-lg "
+              quality={100}
             />
             <h1 className="text-[24px] font-bold text-secondary-dark tracking-[0.86px] my-[32px] leading-9">
               {detailedProduct?.others[2].name}
@@ -319,7 +312,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
           </div>
         </div>
       </section>
-      <div>
+      <div className="pt-[64px] md:pt-0">
         <MixedProduct />
         <ProductFooter />
       </div>

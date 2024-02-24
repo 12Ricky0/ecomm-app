@@ -4,14 +4,18 @@ import Image from "next/image";
 import { useContext, useState } from "react";
 import { CartContext } from "@/cart-provide";
 import Link from "next/link";
+import { CartType } from "@/libs/definitions";
+import { deleteCookie } from "@/libs/action";
+import { useRouter } from "next/navigation";
 
-export default function CheckoutModal() {
-  const { cart, setCart }: any = useContext(CartContext);
+export default function CheckoutModal({ carte }: { carte: CartType[] }) {
+  const { setCart }: any = useContext(CartContext);
   const [count, setCount] = useState(2);
-  let loader = cart.slice(0, count);
-  let balance = cart.length - loader.length;
+  let loader = carte.slice(0, count);
+  let balance = carte.length - loader.length;
   let total = 0;
-  cart && cart.map((c: any) => (total += c.price * c.qty));
+  carte && carte.map((c: any) => (total += c.price * c.qty));
+  let vat = (total * 10) / 100;
 
   function handleCount() {
     if (balance == 0) {
@@ -29,10 +33,11 @@ export default function CheckoutModal() {
     "zx9-speaker": "zx9",
   };
 
+  const router = useRouter();
+
   return (
     <Overlay>
-      <h1>Hello</h1>
-      {/* <div className="w-[100%] mt-[60px] flex justify-center flex-row ">
+      <div className="w-[100%] mt-[60px] flex justify-center flex-row ">
         <section className="bg-secondary-white absolute overflow-auto mx-6 rounded-lg">
           <article className="mx-8 lg:mx-12">
             <div className="mt-8">
@@ -55,7 +60,7 @@ export default function CheckoutModal() {
 
             <article className="md:flex">
               <article className="bg-primary-gray rounded-t-lg lg:rounded-l-lg lg:rounded-r-none">
-                {cart &&
+                {carte &&
                   loader.map(
                     (
                       item: { name: string; price: number; qty: number },
@@ -102,14 +107,18 @@ export default function CheckoutModal() {
                     GRAND TOTAL
                   </h1>
                   <h1 className="font-bold text-[18px] text-secondary-white mt-[8px] pb-[19px] lg:pb-[40px] leading-normal ">
-                    $ {new Intl.NumberFormat().format(Number(total))}
+                    $ {new Intl.NumberFormat().format(total + vat + 50)}
                   </h1>
                 </article>
               </div>
             </article>
             <Link href="/">
               <button
-                onClick={() => setCart("")}
+                onClick={() => {
+                  setCart("");
+                  deleteCookie();
+                  !carte && router.back();
+                }}
                 className="h-12 w-[100%] mt-[23px] mb-6 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
               >
                 BACK TO HOME
@@ -117,7 +126,7 @@ export default function CheckoutModal() {
             </Link>
           </article>
         </section>
-      </div> */}
+      </div>
     </Overlay>
   );
 }

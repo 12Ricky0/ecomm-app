@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CartContext } from "@/cart-provide";
 import { setCookies, storedCookie } from "@/libs/action";
+import { CartType } from "@/libs/definitions";
 
 export function ButtonOne({ href }: { href: string }) {
   return (
@@ -26,9 +27,12 @@ export function ButtonTwo({ href }: { href: string }) {
 }
 
 export function ButtonThree({ href }: { href: string }) {
+  const { displayMenu, setDisplayMenu }: any = useContext(CartContext);
+
   return (
     <div className="flex items-center justify-center">
       <Link
+        onClick={() => setDisplayMenu(!displayMenu)}
         href={href}
         className="tracking-[1px] leading-normal font-bold text-sm mr-[13px] hover:text-primary-brown cursor-pointer text-secondary-dark"
       >
@@ -160,21 +164,21 @@ export function QtyButton2({
   );
 }
 
-export function CheckoutButton() {
-  let value = useRef<{ name: string; price: number; qty: number }[]>();
+export function CheckoutButton({ cart }: { cart: CartType[] }) {
+  // let value = useRef<{ name: string; price: number; qty: number }[]>();
   const { setDisplayCart, displayCart }: any = useContext(CartContext);
 
-  let val = storedCookie();
+  // let val = storedCookie();
 
-  try {
-    value.current = JSON.parse(localStorage.getItem("cart") || "");
-  } catch (error) {}
+  // try {
+  //   value.current = JSON.parse(localStorage.getItem("cart") || "");
+  // } catch (error) {}
 
   return (
     <Link href="/checkout">
       <div className="mx-7 pb-[31px]">
         <button
-          disabled={value.current ? false : true}
+          disabled={cart ? false : true}
           onClick={() => setDisplayCart(!displayCart)}
           className="h-12 w-[100%]  bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
         >

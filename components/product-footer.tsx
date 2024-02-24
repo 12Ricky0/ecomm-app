@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ProductFooter() {
   return (
-    <section className=" mt-[120px] lg:flex justify-between flex-row-reverse  md:mx-[40px] lg:mx-[165px] mx-6 rounded-lg">
+    <section className=" mt-[120px] lg:flex justify-between flex-row-reverse lg:gap-8  md:mx-[40px] lg:mx-[165px] mx-6 rounded-lg">
       <Image
         src="/assets/shared/mobile/image-best-gear.jpg"
         alt="best-gear"

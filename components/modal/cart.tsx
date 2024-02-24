@@ -8,7 +8,7 @@ import { getCookies, deleteCookie } from "@/libs/action";
 
 import Overlay from "../overlay";
 export default function Cart() {
-  const { items, setItems, displayCart, setDisplayCart }: any =
+  const { setCart, items, setItems, displayCart, setDisplayCart }: any =
     useContext(CartContext);
   let total = 0;
   const itemName = {
@@ -20,12 +20,12 @@ export default function Cart() {
     "zx9-speaker": "zx9",
   };
 
-  const [cart, setCart] = useState<CartType[]>([]);
+  const [carte, setCarte] = useState<CartType[]>([]);
 
   useEffect(() => {
     getCookies()
       .then((data) => {
-        setCart(data);
+        setCarte(data);
       })
       .catch((error) => {
         console.error(error); // Handle any errors
@@ -41,7 +41,7 @@ export default function Cart() {
   //   value.current = JSON.parse(localStorage.getItem("cart") || "");
   // } catch (error) {}
 
-  cart && cart.map((c: CartType) => (total += c.price * c.qty));
+  carte && carte.map((c: CartType) => (total += c.price * c.qty));
   return (
     <Overlay>
       <section className="z-[1000] bg-secondary-white md:w-[377px] overflow-auto lg:mr-[165px] md:mr-10 rounded-lg mx-6 relative md:absolute md:right-0 opacity-100 mt-6">
@@ -51,11 +51,12 @@ export default function Cart() {
               // onClick={() => console.log(value)}
               className="text-secondary-dark text-[18px] font-bold leading-normal tracking-[1.29px] mb-[31px]"
             >
-              Cart({cart?.length})
+              Cart({carte?.length})
             </h1>
             <span
               onClick={() => {
                 deleteCookie();
+                setCart("");
                 // localStorage.removeItem("cart");
                 setDisplayCart(!displayCart);
               }}
@@ -64,8 +65,8 @@ export default function Cart() {
               Remove all
             </span>
           </article>
-          {cart &&
-            cart.map((c: CartType, index: number) => (
+          {carte &&
+            carte.map((c: CartType, index: number) => (
               <div key={index} className="mb-6">
                 <article className="flex justif items-center ">
                   <Image
@@ -105,7 +106,7 @@ export default function Cart() {
             </span>
           </article>
         </article>
-        <CheckoutButton />
+        <CheckoutButton cart={carte} />
       </section>
     </Overlay>
   );
