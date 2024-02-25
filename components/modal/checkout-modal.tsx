@@ -12,7 +12,7 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
   const { setCart }: any = useContext(CartContext);
   const [count, setCount] = useState(2);
   let loader = carte && carte?.slice(0, count);
-  let balance = carte.length - loader.length;
+  let balance = carte?.length - loader?.length;
   let total = 0;
   carte && carte.map((c: CartType) => (total += c.price * c.qty));
   let vat = (total * 10) / 100;
@@ -71,7 +71,7 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
                         className="flex items-center mb-2 justify-between"
                       >
                         <Image
-                          src={`/assets/cart/image-${item.name}.jpg`}
+                          src={`/assets/cart/image-${item?.name}.jpg`}
                           alt="headphone"
                           width={84}
                           height={104}
@@ -79,14 +79,16 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
                         />
                         <div className="mr-6">
                           <h1 className="font-bold text-[15px] w-[75px] text-secondary-dark mr-[70px] inline-block leading-[25px] ">
-                            {itemName[item.name as keyof typeof itemName]}
+                            {itemName[item?.name as keyof typeof itemName]}
                           </h1>
                           <h1 className="font-bold text-[15px] text-secondary-dark leading-[25px] inline-block opacity-50 ">
-                            X{item.qty}
+                            X{item?.qty}
                           </h1>
                           <p className="font-bold text-[14px] text-secondary-dark leading-[25px] opacity-50">
                             $
-                            {new Intl.NumberFormat().format(Number(item.price))}
+                            {new Intl.NumberFormat().format(
+                              Number(item?.price)
+                            )}
                           </p>
                         </div>
                       </div>
