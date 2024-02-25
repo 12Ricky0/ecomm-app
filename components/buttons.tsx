@@ -1,10 +1,11 @@
 "use client";
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CartContext } from "@/cart-provide";
-import { setCookies, storedCookie } from "@/libs/action";
+import { setCookies } from "@/libs/action";
 import { CartType } from "@/libs/definitions";
+import { useRouter } from "next/navigation";
 
 export function ButtonOne({ href }: { href: string }) {
   return (
@@ -27,12 +28,12 @@ export function ButtonTwo({ href }: { href: string }) {
 }
 
 export function ButtonThree({ href }: { href: string }) {
-  const { displayMenu, setDisplayMenu }: any = useContext(CartContext);
+  const { setDisplayMenu }: any = useContext(CartContext);
 
   return (
     <div className="flex items-center justify-center">
       <Link
-        onClick={() => setDisplayMenu(!displayMenu)}
+        onClick={() => setDisplayMenu(false)}
         href={href}
         className="tracking-[1px] leading-normal font-bold text-sm mr-[13px] hover:text-primary-brown cursor-pointer text-secondary-dark"
       >
@@ -61,25 +62,15 @@ export function ButtonFour({ href }: { href: string }) {
   );
 }
 
-export function QuantityButton({
-  className,
-  defaultValue,
-}: {
-  className: string;
-  defaultValue?: number;
-}) {
-  // let [quantity, setQuantity] = useState(1);
-  const { quantity, setQuantity, displayCart }: any = useContext(CartContext);
+export function QuantityButton({ className }: { className: string }) {
+  const { quantity, setQuantity }: any = useContext(CartContext);
 
   function handleReduce() {
     if (quantity > 1) {
       setQuantity((prevCount: any) => prevCount - 1);
-      // localStorage.setItem("quantity", JSON.stringify(quantity));
     }
   }
-  // useEffect(() => {
-  //   localStorage.setItem("quantity", JSON.stringify(quantity));
-  // }, [quantity]);
+
   return (
     <div className={className}>
       <button
@@ -94,7 +85,6 @@ export function QuantityButton({
       <button
         onClick={() => {
           setQuantity((prevCount: any) => prevCount + 1);
-          // localStorage.setItem("quantity", JSON.stringify(quantity));
         }}
         className="text-secondary-dark hover:text-primary-brown opacity-25 font-bold text-[13px] tracking-[1px] w-4 leading-normal"
       >
@@ -111,8 +101,7 @@ export function QtyButton2({
   quantity: number;
   name: string;
 }) {
-  const { cart, setCart }: any = useContext(CartContext);
-  const updatedCart = [...cart];
+  const { cart }: any = useContext(CartContext);
 
   const [count, setCount] = useState(quantity);
 
@@ -123,9 +112,10 @@ export function QtyButton2({
     );
 
     if (existingItemIndex !== -1) {
-      // If the item already exists in the cart, update its quantity
       updatedCart[existingItemIndex].qty += 1;
+
       setCount(count + 1);
+      setCookies(updatedCart);
     }
   }
 
@@ -135,12 +125,10 @@ export function QtyButton2({
       (item: any) => item.name === name
     );
 
-    if (existingItemIndex !== -1) {
-      // If the item already exists in the cart, update its quantity
-      if (quantity > 1) {
-        updatedCart[existingItemIndex].qty -= 1;
-        setCount(count - 1);
-      }
+    if (existingItemIndex !== -1 && count > 1) {
+      updatedCart[existingItemIndex].qty -= 1;
+      setCount(count - 1);
+      setCookies(updatedCart);
     }
   }
   return (
@@ -165,14 +153,7 @@ export function QtyButton2({
 }
 
 export function CheckoutButton({ cart }: { cart: CartType[] }) {
-  // let value = useRef<{ name: string; price: number; qty: number }[]>();
   const { setDisplayCart, displayCart }: any = useContext(CartContext);
-
-  // let val = storedCookie();
-
-  // try {
-  //   value.current = JSON.parse(localStorage.getItem("cart") || "");
-  // } catch (error) {}
 
   return (
     <Link href="/checkout">
@@ -202,8 +183,8 @@ export function AddToCart({ name, price }: { name: string; price: number }) {
         ...prevData,
         { name: name, price: price, qty: quantity },
       ]);
-      // localStorage.setItem("cart", JSON.stringify(updatedCart));
       setCookies(updatedCart);
+      setQuantity(1);
     }
   }
 
@@ -214,5 +195,17 @@ export function AddToCart({ name, price }: { name: string; price: number }) {
     >
       ADD TO CART
     </button>
+  );
+}
+
+export function GoBack() {
+  const router = useRouter();
+  return (
+    <div
+      className=" text-secondary-dark opacity-50 font-medium text-md leading-[25px] cursor-pointer "
+      onClick={() => router.back()}
+    >
+      <p className="mt-4 inline-block lg:mt-[80px] md:mt-[33px]">Go Back</p>
+    </div>
   );
 }

@@ -40,7 +40,6 @@ export default async function Headphones() {
               alt="headephone image"
               width={540}
               height={560}
-              // sizes="(min-width: 808px) 50vw, 100vw"
               className="w-[50%] mr-6 mt-[64px] lg:block hidden rounded-lg "
             />
 
@@ -49,7 +48,7 @@ export default async function Headphones() {
                 <h3 className="leading-normal mt-8 tracking-[10px] text-primary-brown opacity-50 text-semi font-normal text-center lg:text-left">
                   NEW PRODUCT
                 </h3>
-                <h1 className="tracking-[1px] uppercase my-6 leading-normal text-secondary-dark font-bold text-ml text-center lg:text-left">
+                <h1 className="tracking-[1px] uppercase my-6 leading-normal md:text-[40px] md:tracking-[1.43px] md:leading-[44px] text-secondary-dark font-bold text-ml text-center lg:text-left">
                   {item?.name}
                 </h1>
                 <p className="opacity-50 mb-6 leading-[25px] text-secondary-dark text-md font-medium text-center lg:text-left">

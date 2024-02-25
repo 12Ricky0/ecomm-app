@@ -1,5 +1,4 @@
 import Overlay from "../overlay";
-import MixedProduct from "../mixed-product";
 import Image from "next/image";
 import { ButtonThree } from "../buttons";
 

@@ -1,7 +1,7 @@
 "use client";
 import Overlay from "../overlay";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "@/cart-provide";
 import Link from "next/link";
 import { CartType } from "@/libs/definitions";
@@ -14,7 +14,7 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
   let loader = carte.slice(0, count);
   let balance = carte.length - loader.length;
   let total = 0;
-  carte && carte.map((c: any) => (total += c.price * c.qty));
+  carte && carte.map((c: CartType) => (total += c.price * c.qty));
   let vat = (total * 10) / 100;
 
   function handleCount() {
@@ -40,7 +40,7 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
       <div className="w-[100%] mt-[60px] flex justify-center flex-row ">
         <section className="bg-secondary-white absolute overflow-auto mx-6 rounded-lg">
           <article className="mx-8 lg:mx-12">
-            <div className="mt-8">
+            <div className="mt-8 ">
               <Image
                 src="/assets/checkout/icon-order-confirmation.svg"
                 alt="headphone"
@@ -58,8 +58,8 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
               You will receive an email confirmation shortly.
             </p>
 
-            <article className="md:flex">
-              <article className="bg-primary-gray rounded-t-lg lg:rounded-l-lg lg:rounded-r-none">
+            <article className="md:flex ">
+              <article className="bg-primary-gray pt-[16px] rounded-t-lg md:rounded-l-lg md:rounded-r-none">
                 {carte &&
                   loader.map(
                     (
@@ -68,20 +68,20 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
                     ) => (
                       <div
                         key={index}
-                        className="flex items-center justify-between"
+                        className="flex items-center mb-2 justify-between"
                       >
                         <Image
                           src={`/assets/cart/image-${item.name}.jpg`}
                           alt="headphone"
                           width={84}
                           height={104}
-                          className=" w-auto h-auto ml-3 lg:ml-[35px]"
+                          className=" w-auto h-auto ml-3"
                         />
                         <div className="mr-6">
                           <h1 className="font-bold text-[15px] w-[75px] text-secondary-dark mr-[70px] inline-block leading-[25px] ">
                             {itemName[item.name as keyof typeof itemName]}
                           </h1>
-                          <h1 className="font-bold text-[15px] lg:mr-6 text-secondary-dark leading-[25px] inline-block opacity-50 ">
+                          <h1 className="font-bold text-[15px] text-secondary-dark leading-[25px] inline-block opacity-50 ">
                             X{item.qty}
                           </h1>
                           <p className="font-bold text-[14px] text-secondary-dark leading-[25px] opacity-50">
@@ -101,7 +101,7 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
                 </p>
               </article>
 
-              <div className="bg-secondary-dark rounded-b-lg lg:rounded-r-lg lg:inline-flex items-end lg:rounded-l-none">
+              <div className="bg-secondary-dark rounded-b-lg md:rounded-r-lg md:inline-flex items-end md:rounded-l-none">
                 <article className="mx-6">
                   <h1 className="font-medium text-[18px] text-secondary-white opacity-50 pt-[15px] leading-[25px] ">
                     GRAND TOTAL

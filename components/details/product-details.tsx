@@ -1,28 +1,23 @@
 "use server";
 import Image from "next/image";
-import Link from "next/link";
-import { ButtonOne, QuantityButton, AddToCart } from "../buttons";
+import { ButtonOne, QuantityButton, AddToCart, GoBack } from "../buttons";
 import MixedProduct from "../mixed-product";
 import ProductFooter from "../product-footer";
 import { productDetails } from "@/libs/action";
-// import { create } from "@/libs/action";
+import { notFound } from "next/navigation";
 
 export default async function ProductDetails({ slug }: { slug: string }) {
   const req = await productDetails(slug);
   const detailedProduct = await req?.json();
-  // const arr:any[]=detailedProduct
 
-  // let detailedProduct = data.find((d) => d.name === "ZX9 Speaker");
+  if (!detailedProduct) {
+    notFound();
+  }
 
   return (
     <section className="">
       <div className="mx-6 md:mx-[40px] lg:mx-[165px]">
-        <Link
-          href="/"
-          className=" text-secondary-dark opacity-50 font-medium text-md leading-[25px] "
-        >
-          <p className="mt-4 lg:mt-[80px] md:mt-[33px]">Go Back</p>
-        </Link>
+        <GoBack />
       </div>
       <section className="mx-6 md:mx-[40px] lg:mx-[165px] lg:mb-[100px] mb-[60px]">
         <article className="md:flex items-center justify-between">
@@ -54,9 +49,6 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               NEW PRODUCT
             </h3>
             <h1 className="tracking-[1px] lg:tracking-[1.43px] uppercase my-6 leading-normal md:leading-[32px] lg:leading-[44px] text-secondary-dark font-bold text-ml lg:text-[40px] text-left">
-              {/* {detailedProduct?.name.slice(0, 4)}
-              <br />
-              {detailedProduct?.name.slice(5, 15)} */}
               {detailedProduct?.name}
             </h1>
             <p className="opacity-50 mb-6 leading-[25px] text-secondary-dark text-md font-medium text-left">
@@ -70,7 +62,6 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               <AddToCart
                 name={detailedProduct?.slug}
                 price={detailedProduct?.price}
-                // qty={}
               />
             </div>
           </article>
@@ -163,7 +154,6 @@ export default async function ProductDetails({ slug }: { slug: string }) {
                 height={592}
                 className="w rounded-lg w-full"
                 quality={100}
-                // fill={true}
               />
             </div>
           </div>

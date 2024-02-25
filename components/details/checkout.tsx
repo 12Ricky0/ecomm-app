@@ -1,16 +1,13 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
-import { useFormState } from "react-dom";
 import { handleUserData } from "@/libs/action";
-import { useEffect, useRef, useState, useContext } from "react";
-import { CartContext } from "@/cart-provide";
+import { useState } from "react";
 import { CartType } from "@/libs/definitions";
+import { useRouter } from "next/navigation";
+import { GoBack } from "../buttons";
 
 export default function Checkout({ cart }: { cart: CartType[] }) {
-  // let value = useRef<{ name: string; price: number; qty: number }[]>();
-  // const { cart }: any = useContext(CartContext);
-
+  const router = useRouter();
   let total = 0;
   const itemName = {
     "yx1-earphones": "yx1",
@@ -20,12 +17,6 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
     "xx99-mark-two-headphones": "xx99 mk II",
     "zx9-speaker": "zx9",
   };
-
-  // useEffect(() => {
-  //   try {
-  //     value.current = JSON.parse(localStorage.getItem("cart") || "");
-  //   } catch (error) {}
-  // }, [value]);
 
   cart && cart.map((c: CartType) => (total += c.price * c.qty));
   let vat = (total * 10) / 100;
@@ -37,20 +28,8 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
       className="mx-6 md:mx-[40px] lg:mx-[165px] lg:flex justify-between overflow-hidden items-start text-[14px] caret-primary-brown"
       action={handleUserData}
     >
-      <section
-        // action={handleUserData}
-        className="text-[14px] font-bold lg:w-[100%] "
-      >
-        <div>
-          <Link
-            href="/"
-            className=" text-secondary-dark opacity-50 font-medium text-md leading-[25px] "
-          >
-            <p className="mt-4 inline-block lg:mt-[80px] md:mt-[33px]">
-              Go Back
-            </p>
-          </Link>
-        </div>
+      <section className="text-[14px] font-bold lg:w-[100%] ">
+        <GoBack />
 
         <fieldset className="bg-secondary-white rounded-lg pb-[31px] lg:mt-[38px] mt-6">
           <h1 className="text-secondary-dark mb-8 mx-6 lg:mx-12 lg:mt-[54px] md:mt-[30px] mt-6 md:mx-7 font-bold md:text-[32px] text-ml leading-normal md:tracking-[1.14px] tracking-[1px] md:leading-9">
@@ -61,7 +40,6 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
           </h2>
 
           <div className="mx-6 lg:mx-12 md:mx-7 md:grid grid-cols-2 grid-rows-2">
-            {/* <div></div> */}
             <div className="md:mr-4">
               <label
                 className="block text-[12px] text-secondary-dark font-bold leading-normal tracking-[-0.21px] mb-[9px]"
@@ -192,7 +170,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   isChecked ? "border-primary-brown" : "border-primary-gray"
                 } cursor-pointer flex items-center md:w-[309px] `}
               >
-                <div>
+                <div className="flex justify-center items-center">
                   <input
                     className="mx-4 cursor-pointer w-[20px] h-[20px] appearance-none  border border-[#cfcfcf] rounded-[50%] p-[5px]"
                     type="radio"
@@ -202,7 +180,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   <div
                     className={`w-[10px] h-[10px] bg-primary-brown rounded-[50%] ${
                       isChecked ? "absolute" : "hidden"
-                    }  translate-x-[20.7px] -translate-y-5 `}
+                    }  `}
                   />
                 </div>
                 <label className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]">
@@ -214,7 +192,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   !isChecked ? "border-primary-brown" : "border-primary-gray"
                 } `}
               >
-                <div>
+                <div className="flex justify-center items-center">
                   <input
                     className="mx-4 cursor-pointer w-[20px] h-[20px] appearance-none  border border-[#cfcfcf] rounded-[50%] p-[5px]"
                     type="radio"
@@ -224,7 +202,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   <div
                     className={`w-[10px] h-[10px] bg-primary-brown rounded-[50%] ${
                       !isChecked ? "absolute" : "hidden"
-                    }  translate-x-[20.7px] -translate-y-5 `}
+                    } `}
                   />
                 </div>
                 <label className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]">
@@ -337,15 +315,16 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
               </h1>
             </article>
           </article>
-          {/* <Link href="/checkout/completed"> */}
           <button
+            onClick={() => {
+              router.push("/checkout/completed");
+            }}
             disabled={cart ? false : true}
             type="submit"
             className="h-12 w-[100%] mt-[32px] bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
           >
             CONTINUE & PAY
           </button>
-          {/* </Link> */}
         </div>
       </article>
     </form>

@@ -2,8 +2,8 @@
 import mongoose from "mongoose";
 import Product from "./schema";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { CartType } from "./definitions";
+import { notFound } from "next/navigation";
 
 export async function mongoDBConnection() {
   try {
@@ -22,6 +22,7 @@ export async function productDetails(query: string) {
     return Response.json(res);
   } catch (error) {
     console.error(error);
+    throw new Error(notFound());
   }
 }
 
@@ -49,17 +50,7 @@ export async function storedCookie() {
   } catch (error) {}
 }
 
-export type State = {
-  errors?: {
-    customerId?: string[];
-    amount?: string[];
-    status?: string[];
-  };
-  message?: string | null;
-};
-
 export async function handleUserData(formData: FormData) {
   const rawFormData = Object.fromEntries(formData?.entries());
-  console.log(rawFormData);
-  redirect("/checkout/completed");
+  // redirect("/checkout/completed");
 }
