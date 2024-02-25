@@ -4,7 +4,7 @@ import ProductFooter from "../product-footer";
 import MixedProduct from "../mixed-product";
 
 export default async function Headphones() {
-  const promise = await fetch("http://localhost:3000/api", {
+  const promise = await fetch("https://audiophile-phi-eight.vercel.app/api", {
     cache: "no-store",
   });
   const response = await promise.json();
