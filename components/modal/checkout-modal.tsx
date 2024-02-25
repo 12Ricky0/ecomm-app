@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 export default function CheckoutModal({ carte }: { carte: CartType[] }) {
   const { setCart }: any = useContext(CartContext);
   const [count, setCount] = useState(2);
-  let loader = carte?.slice(0, count);
+  let loader = carte && carte?.slice(0, count);
   let balance = carte.length - loader.length;
   let total = 0;
   carte && carte.map((c: CartType) => (total += c.price * c.qty));

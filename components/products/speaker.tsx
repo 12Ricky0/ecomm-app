@@ -4,12 +4,9 @@ import MixedProduct from "../mixed-product";
 import ProductFooter from "../product-footer";
 
 export default async function Speakers() {
-  const promise = await fetch(
-    "https://audiophile-git-main-12ricky0.vercel.app/api",
-    {
-      cache: "no-store",
-    }
-  );
+  const promise = await fetch("http://localhost:3000/api", {
+    cache: "no-store",
+  });
   const response = await promise.json();
 
   let data: any[] = response;
