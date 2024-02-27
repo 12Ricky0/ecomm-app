@@ -5,6 +5,7 @@ import { useState } from "react";
 import { CartType } from "@/libs/definitions";
 import { useRouter } from "next/navigation";
 import { GoBack } from "../buttons";
+import CheckoutModal from "../modal/checkout-modal";
 
 export default function Checkout({ cart }: { cart: CartType[] }) {
   const router = useRouter();
@@ -69,6 +70,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                 type="email"
                 name="email"
                 placeholder="alexei@mail.com"
+                required
               />
             </div>
             <div className="lg:mr-4">
@@ -84,6 +86,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                 type="number"
                 name="number"
                 placeholder="+1 202-555-0136"
+                required
               />
             </div>
           </div>
@@ -105,6 +108,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
               type="text"
               name="address"
               placeholder="1137 Williams Avenue"
+              required
             />
             <div className="md:grid grid-cols-2 grid-rows-2">
               <div className="md:mr-4">
@@ -120,6 +124,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   type="text"
                   name="zipcode"
                   placeholder="10001"
+                  required
                 />
               </div>
               <div>
@@ -135,6 +140,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   type="text"
                   name="city"
                   placeholder="New York"
+                  required
                 />
               </div>
               <div className="md:mr-4">
@@ -150,6 +156,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   type="text"
                   name="country"
                   placeholder="United States"
+                  required
                 />
               </div>
             </div>
@@ -225,6 +232,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   id="e-money"
                   type="number"
                   placeholder="238521993"
+                  required
                 />
               </div>
               <div>
@@ -239,6 +247,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   id="pin"
                   type="number"
                   placeholder="6891"
+                  required
                 />
               </div>
             </div>
@@ -316,9 +325,9 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
             </article>
           </article>
           <button
-            onClick={() => {
-              router.push("/checkout/completed");
-            }}
+            // onClick={() => {
+            //   router.push("/checkout/completed");
+            // }}
             disabled={cart ? false : true}
             type="submit"
             className="h-12 w-[100%] mt-[32px] bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"

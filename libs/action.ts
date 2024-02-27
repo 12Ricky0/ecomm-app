@@ -4,6 +4,7 @@ import Product from "./schema";
 import { cookies } from "next/headers";
 import { CartType } from "./definitions";
 import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export async function mongoDBConnection() {
   try {
@@ -52,5 +53,5 @@ export async function storedCookie() {
 
 export async function handleUserData(formData: FormData) {
   const rawFormData = Object.fromEntries(formData?.entries());
-  // redirect("/checkout/completed");
+  redirect("/checkout/completed");
 }

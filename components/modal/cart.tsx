@@ -34,64 +34,64 @@ export default function Cart() {
   carte && carte.map((c: CartType) => (total += c.price * c.qty));
   return (
     <Overlay>
-      {/* <div className="pb-[300px]"> */}
-      <section className="z-[1000] bg-secondary-white md:w-[377px] overflow-y-auto-auto lg:mr-[165px] md:mr-10 rounded-lg mx-6 relative md:absolute md:right-0 mt-6">
-        <article className="mx-[28px] md:mx-[33px]">
-          <article className="flex justify-between pt-8">
-            <h1 className="text-secondary-dark text-[18px] font-bold leading-normal tracking-[1.29px] mb-[31px]">
-              Cart({carte?.length})
-            </h1>
-            <span
-              onClick={() => {
-                deleteCookie();
-                setCart("");
-                setDisplayCart(!displayCart);
-              }}
-              className="cursor-pointer underline opacity-50 hover:text-primary-brown hover:opacity-100 text-secondary-dark font-medium text-md leading-[25px]"
-            >
-              Remove all
-            </span>
-          </article>
-          {carte &&
-            carte.map((c: CartType, index: number) => (
-              <div key={index} className="mb-6">
-                <article className="flex justif items-center ">
-                  <Image
-                    src={`/assets/cart/image-${c.name}.jpg`}
-                    alt="headephone image"
-                    width={64}
-                    height={64}
-                    className="rounded-lg mb-2 mr-4"
-                    quality={100}
-                  />
-                  <div className="inline-flex justify-between items-center">
-                    <div className="">
-                      <h1 className="font-bold text-md w-[75px] text-secondary-dark leading-[25px]">
-                        {itemName[c.name as keyof typeof itemName]}
-                      </h1>
-                      <span className="font-bold text-[14px] opacity-50 text-secondary-dark leading-[25px]">
-                        $ {new Intl.NumberFormat().format(Number(c.price))}
-                      </span>
+      <div className="mb-[1000px]">
+        <section className="z-[1000] bg-secondary-white md:w-[377px] overflow-y-auto lg:mr-[165px] md:mr-10 rounded-lg mx-6 relative md:absolute md:right-0 mt-6">
+          <article className="mx-[28px] md:mx-[33px]">
+            <article className="flex justify-between pt-8">
+              <h1 className="text-secondary-dark text-[18px] font-bold leading-normal tracking-[1.29px] mb-[31px]">
+                Cart({carte?.length})
+              </h1>
+              <span
+                onClick={() => {
+                  deleteCookie();
+                  setCart("");
+                  setDisplayCart(!displayCart);
+                }}
+                className="cursor-pointer underline opacity-50 hover:text-primary-brown hover:opacity-100 text-secondary-dark font-medium text-md leading-[25px]"
+              >
+                Remove all
+              </span>
+            </article>
+            {carte &&
+              carte.map((c: CartType, index: number) => (
+                <div key={index} className="mb-6">
+                  <article className="flex justif items-center ">
+                    <Image
+                      src={`/assets/cart/image-${c.name}.jpg`}
+                      alt="headephone image"
+                      width={64}
+                      height={64}
+                      className="rounded-lg mb-2 mr-4"
+                      quality={100}
+                    />
+                    <div className="inline-flex justify-between items-center">
+                      <div className="">
+                        <h1 className="font-bold text-md w-[75px] text-secondary-dark leading-[25px]">
+                          {itemName[c.name as keyof typeof itemName]}
+                        </h1>
+                        <span className="font-bold text-[14px] opacity-50 text-secondary-dark leading-[25px]">
+                          $ {new Intl.NumberFormat().format(Number(c.price))}
+                        </span>
+                      </div>
+                      <div className="absolute md:right-[33px] right-[28px]">
+                        <QtyButton2 name={c.name} quantity={c.qty} />
+                      </div>
                     </div>
-                    <div className="absolute md:right-[33px] right-[28px]">
-                      <QtyButton2 name={c.name} quantity={c.qty} />
-                    </div>
-                  </div>
-                </article>
-              </div>
-            ))}
-          <article className="mt-2 flex justify-between pb-6">
-            <span className="cursor-pointer opacity-50 text-secondary-dark font-medium text-md leading-[25px]">
-              Total
-            </span>
-            <span className="font-bold text-[18px] leading-normal">
-              $ {new Intl.NumberFormat().format(Number(total))}
-            </span>
+                  </article>
+                </div>
+              ))}
+            <article className="mt-2 flex justify-between pb-6">
+              <span className="cursor-pointer opacity-50 text-secondary-dark font-medium text-md leading-[25px]">
+                Total
+              </span>
+              <span className="font-bold text-[18px] leading-normal">
+                $ {new Intl.NumberFormat().format(Number(total))}
+              </span>
+            </article>
           </article>
-        </article>
-        <CheckoutButton cart={carte} />
-      </section>
-      {/* </div> */}
+          <CheckoutButton cart={carte} />
+        </section>
+      </div>
     </Overlay>
   );
 }
