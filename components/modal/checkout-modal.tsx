@@ -37,7 +37,7 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
 
   return (
     <Overlay>
-      <div className="w-[100%] mt-[60px] flex justify-center flex-row ">
+      <div className="w-[100%] mt-[60px] mb-[100px] flex justify-center flex-row ">
         <section className="bg-secondary-white absolute overflow-auto mx-6 rounded-lg">
           <article className="mx-8 lg:mx-12">
             <div className="mt-8 ">

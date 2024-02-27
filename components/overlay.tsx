@@ -1,7 +1,7 @@
 export default function Overlay({ children }: { children: React.ReactNode }) {
   return (
-    <section className="w-[100%] h-[100%] z-[999] overflow-auto opacity-100 fixed bg-primary-modal ">
+    <div className="w-[100%] h-[100%] z-[999] overflow-y-scroll opacity-100 fixed bg-primary-modal ">
       {children}
-    </section>
+    </div>
   );
 }

@@ -34,7 +34,8 @@ export default function Cart() {
   carte && carte.map((c: CartType) => (total += c.price * c.qty));
   return (
     <Overlay>
-      <section className="z-[1000] bg-secondary-white md:w-[377px] overflow-auto lg:mr-[165px] md:mr-10 rounded-lg mx-6 relative md:absolute md:right-0 opacity-100 mt-6">
+      {/* <div className="pb-[300px]"> */}
+      <section className="z-[1000] bg-secondary-white md:w-[377px] overflow-y-auto-auto lg:mr-[165px] md:mr-10 rounded-lg mx-6 relative md:absolute md:right-0 mt-6">
         <article className="mx-[28px] md:mx-[33px]">
           <article className="flex justify-between pt-8">
             <h1 className="text-secondary-dark text-[18px] font-bold leading-normal tracking-[1.29px] mb-[31px]">
@@ -73,10 +74,6 @@ export default function Cart() {
                       </span>
                     </div>
                     <div className="absolute md:right-[33px] right-[28px]">
-                      {/* <QuantityButton
-                          defaultValue={Number(c.qty)}
-                          className="bg-primary-gray flex py-[7px] w-[96px] justify-center"
-                        /> */}
                       <QtyButton2 name={c.name} quantity={c.qty} />
                     </div>
                   </div>
@@ -94,6 +91,7 @@ export default function Cart() {
         </article>
         <CheckoutButton cart={carte} />
       </section>
+      {/* </div> */}
     </Overlay>
   );
 }

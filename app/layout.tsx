@@ -7,7 +7,10 @@ import { cookies } from "next/headers";
 const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Audiophile",
+  title: {
+    template: "%s | Audiophile",
+    default: "Audiophile",
+  },
   description: "Online Shopping",
 };
 
