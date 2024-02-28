@@ -36,7 +36,9 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![./public/assets/home.png](./public/assets/home.png)
+![./public/assets/cart.png](./public/assets/cart.png)
+![./public/assets/completed.png](./public/assets/completed.png)
 
 ### Links
 
