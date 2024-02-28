@@ -46,7 +46,7 @@ export default async function Speakers() {
             <article className="lg:w-[445px] md:w-[572px] md:mx-auto">
               <article className="text-center lg:text-left">
                 <h3 className="leading-normal mt-8 tracking-[10px] text-primary-brown opacity-50 text-semi font-normal text-center lg:text-left">
-                  NEW PRODUCT
+                  {item.new === true && "NEW PRODUCT"}
                 </h3>
                 <h1 className="tracking-[1px] uppercase my-6 md:text-[40px] md:tracking-[1.43px] md:leading-[44px] leading-normal text-secondary-dark font-bold text-ml text-center lg:text-left">
                   {item?.name}

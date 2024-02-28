@@ -5,7 +5,6 @@ import { useState } from "react";
 import { CartType } from "@/libs/definitions";
 import { useRouter } from "next/navigation";
 import { GoBack } from "../buttons";
-import CheckoutModal from "../modal/checkout-modal";
 
 export default function Checkout({ cart }: { cart: CartType[] }) {
   const router = useRouter();
@@ -20,14 +19,18 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
   };
 
   cart && cart.map((c: CartType) => (total += c.price * c.qty));
-  let vat = (total * 10) / 100;
+  let vat = (total * 20) / 100;
 
   const [isChecked, setIsChecked] = useState(false);
+  const f = new FormData();
 
   return (
     <form
       className="mx-6 md:mx-[40px] lg:mx-[165px] lg:flex justify-between overflow-hidden items-start text-[14px] caret-primary-brown"
       action={handleUserData}
+      onSubmit={() => {
+        router.push("/checkout/completed");
+      }}
     >
       <section className="text-[14px] font-bold lg:w-[100%] ">
         <GoBack />
@@ -55,6 +58,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                 name="name"
                 placeholder="Alexei Ward"
                 required
+                autoComplete="on"
               />
             </div>
             <div>
@@ -71,6 +75,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                 name="email"
                 placeholder="alexei@mail.com"
                 required
+                autoComplete="on"
               />
             </div>
             <div className="lg:mr-4">
@@ -87,6 +92,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                 name="number"
                 placeholder="+1 202-555-0136"
                 required
+                autoComplete="on"
               />
             </div>
           </div>
@@ -109,6 +115,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
               name="address"
               placeholder="1137 Williams Avenue"
               required
+              autoComplete="on"
             />
             <div className="md:grid grid-cols-2 grid-rows-2">
               <div className="md:mr-4">
@@ -125,6 +132,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   name="zipcode"
                   placeholder="10001"
                   required
+                  autoComplete="on"
                 />
               </div>
               <div>
@@ -141,6 +149,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   name="city"
                   placeholder="New York"
                   required
+                  autoComplete="on"
                 />
               </div>
               <div className="md:mr-4">
@@ -157,6 +166,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   name="country"
                   placeholder="United States"
                   required
+                  autoComplete="on"
                 />
               </div>
             </div>
@@ -171,7 +181,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
             >
               Payment Method
             </label>
-            <div id="payment">
+            <div>
               <div
                 className={`border-solid border rounded-lg h-[56px] hover:border-primary-brown ${
                   isChecked ? "border-primary-brown" : "border-primary-gray"
@@ -183,6 +193,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                     type="radio"
                     checked={isChecked}
                     onChange={() => setIsChecked(!isChecked)}
+                    id="payment"
                   />
                   <div
                     className={`w-[10px] h-[10px] bg-primary-brown rounded-[50%] ${
@@ -190,7 +201,10 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                     }  `}
                   />
                 </div>
-                <label className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]">
+                <label
+                  htmlFor="emoney"
+                  className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]"
+                >
                   e-Money
                 </label>
               </div>
@@ -204,6 +218,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                     className="mx-4 cursor-pointer w-[20px] h-[20px] appearance-none  border border-[#cfcfcf] rounded-[50%] p-[5px]"
                     type="radio"
                     checked={!isChecked}
+                    id="emoney"
                     onChange={() => setIsChecked(!isChecked)}
                   />
                   <div
@@ -212,9 +227,9 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                     } `}
                   />
                 </div>
-                <label className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]">
+                <span className=" text-[14px] text-secondary-dark font-bold leading-normal tracking-[-0.25px]">
                   Cash on Delivery
-                </label>
+                </span>
               </div>
             </div>
           </div>
@@ -233,6 +248,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   type="number"
                   placeholder="238521993"
                   required
+                  autoComplete="off"
                 />
               </div>
               <div>
@@ -248,6 +264,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   type="number"
                   placeholder="6891"
                   required
+                  autoComplete="off"
                 />
               </div>
             </div>
@@ -325,9 +342,6 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
             </article>
           </article>
           <button
-            // onClick={() => {
-            //   router.push("/checkout/completed");
-            // }}
             disabled={cart ? false : true}
             type="submit"
             className="h-12 w-[100%] mt-[32px] bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"

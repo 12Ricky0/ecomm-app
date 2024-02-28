@@ -15,7 +15,7 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
   let balance = carte?.length - loader?.length;
   let total = 0;
   carte && carte.map((c: CartType) => (total += c.price * c.qty));
-  let vat = (total * 10) / 100;
+  let vat = (total * 20) / 100;
 
   function handleCount() {
     if (balance == 0) {

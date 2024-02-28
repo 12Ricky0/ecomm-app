@@ -172,10 +172,12 @@ export function CheckoutButton({ cart }: { cart: CartType[] }) {
 
 export function AddToCart({ name, price }: { name: string; price: number }) {
   const { quantity, setCart, cart, setQuantity }: any = useContext(CartContext);
+  const [added, setAdded] = useState("Add To Cart");
+
+  const updatedCart = [...cart, { name: name, price: price, qty: quantity }];
+  const nameInCart = cart && cart.some((c: any) => c.name === name);
 
   function handleClick() {
-    const updatedCart = [...cart, { name: name, price: price, qty: quantity }];
-    const nameInCart = cart && cart.some((c: any) => c.name === name);
     if (nameInCart) {
       return false;
     } else {
@@ -185,15 +187,18 @@ export function AddToCart({ name, price }: { name: string; price: number }) {
       ]);
       setCookies(updatedCart);
       setQuantity(1);
+      setAdded("Added");
     }
   }
 
   return (
     <button
       onClick={handleClick}
-      className="h-12 w-40 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
+      className={`h-12 w-40 ${
+        nameInCart ? "bg-secondary-light-brown" : "bg-primary-brown"
+      } hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm`}
     >
-      ADD TO CART
+      {nameInCart ? "Added " : added}
     </button>
   );
 }

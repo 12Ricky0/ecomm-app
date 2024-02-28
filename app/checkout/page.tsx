@@ -1,6 +1,11 @@
 import Checkout from "@/components/details/checkout";
 import Footer from "@/components/footer";
 import { cookies } from "next/headers";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Checkout",
+};
 
 export default function CheckoutPage() {
   let cookieStore;
