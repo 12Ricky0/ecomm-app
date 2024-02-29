@@ -45,7 +45,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
             quality={100}
           />
           <article className="lg:w-[445px] md:w-[340px]  text-left">
-            <h3 className="leading-normal mt-8 tracking-[10px] text-primary-brown opacity-50 text-semi font-normal text-center lg:text-left">
+            <h3 className="leading-normal mt-8 tracking-[10px] text-primary-brown opacity-50 text-semi font-normal text-left">
               {detailedProduct.new === true && "NEW PRODUCT"}
             </h3>
             <h1 className="tracking-[1px] lg:tracking-[1.43px] uppercase my-6 leading-normal md:leading-[32px] lg:leading-[44px] text-secondary-dark font-bold text-ml lg:text-[40px] text-left">
