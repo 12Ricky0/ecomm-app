@@ -5,7 +5,7 @@ import React, { useContext, useState } from "react";
 import { CartContext } from "@/cart-provide";
 import Link from "next/link";
 import { CartType } from "@/libs/definitions";
-import { deleteCookie } from "@/libs/action";
+import { deleteCookie, setCookies } from "@/libs/action";
 import { useRouter } from "next/navigation";
 
 export default function CheckoutModal({ carte }: { carte: CartType[] }) {
@@ -119,6 +119,8 @@ export default function CheckoutModal({ carte }: { carte: CartType[] }) {
                 onClick={() => {
                   setCart("");
                   deleteCookie();
+                  setCookies([]);
+
                   !carte && router.back();
                 }}
                 className="h-12 w-[100%] mt-[23px] mb-6 bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"

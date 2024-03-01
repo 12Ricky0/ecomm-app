@@ -40,7 +40,7 @@ export function NavHeader({ cart }: { cart: CartType[] }) {
               alt="cart"
               width={23}
               height={20}
-              className="w-auto h-auto cursor-pointer"
+              className="w-auto h-auto active:outline-dashed cursor-pointer"
               onClick={() => {
                 setDisplayCart(!displayCart);
               }}
@@ -112,7 +112,7 @@ export function NavHeader({ cart }: { cart: CartType[] }) {
               alt="cart"
               width={23}
               height={20}
-              className="w-auto h-auto cursor-pointer"
+              className="w-auto h-auto active:outline-dashed cursor-pointer"
               onClick={() => {
                 setDisplayCart(!displayCart);
               }}

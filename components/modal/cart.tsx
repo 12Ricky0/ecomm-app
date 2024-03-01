@@ -4,7 +4,7 @@ import Image from "next/image";
 import { CheckoutButton, QtyButton2 } from "../buttons";
 import { CartContext } from "@/cart-provide";
 import { CartType } from "@/libs/definitions";
-import { getCookies, deleteCookie } from "@/libs/action";
+import { getCookies, deleteCookie, setCookies } from "@/libs/action";
 
 import Overlay from "../overlay";
 export default function Cart() {
@@ -44,6 +44,7 @@ export default function Cart() {
               <span
                 onClick={() => {
                   deleteCookie();
+                  setCookies([]);
                   setCart("");
                   setDisplayCart(!displayCart);
                 }}

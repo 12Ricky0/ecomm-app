@@ -3,6 +3,7 @@
 import { createContext, useState, useEffect } from "react";
 import { CartType } from "./libs/definitions";
 export const CartContext = createContext({});
+import { getCookies } from "./libs/action";
 
 export default function CartProvider({
   children,
@@ -20,6 +21,17 @@ export default function CartProvider({
     } else {
       document.body.style.overflow = "auto";
     }
+
+    getCookies()
+      .then((data) => {
+        if (!data) {
+          setCart([]);
+        }
+        setCart(data);
+      })
+      .catch((error) => {
+        console.error(error); // Handle any errors
+      });
   }, [displayCart, displayMenu]);
 
   return (

@@ -1,9 +1,9 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CartContext } from "@/cart-provide";
-import { setCookies } from "@/libs/action";
+import { setCookies, getCookies } from "@/libs/action";
 import { CartType } from "@/libs/definitions";
 import { useRouter } from "next/navigation";
 
