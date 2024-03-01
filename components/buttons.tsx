@@ -174,7 +174,9 @@ export function AddToCart({ name, price }: { name: string; price: number }) {
   const { quantity, setCart, cart, setQuantity }: any = useContext(CartContext);
   const [added, setAdded] = useState("Add To Cart");
 
-  const updatedCart = [...cart, { name: name, price: price, qty: quantity }];
+  let c = cart && cart;
+
+  const updatedCart = [...c, { name: name, price: price, qty: quantity }];
   const nameInCart = cart && cart.some((c: any) => c.name === name);
 
   function handleClick() {
