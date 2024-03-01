@@ -3,7 +3,7 @@
 import { createContext, useState, useEffect } from "react";
 import { CartType } from "./libs/definitions";
 export const CartContext = createContext({});
-import { getCookies } from "./libs/action";
+import { getCookies, setCookies } from "./libs/action";
 
 export default function CartProvider({
   children,
@@ -25,6 +25,7 @@ export default function CartProvider({
     getCookies()
       .then((data) => {
         if (!data) {
+          setCookies([]);
           setCart([]);
         }
         setCart(data);
