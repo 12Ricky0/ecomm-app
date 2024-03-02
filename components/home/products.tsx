@@ -54,7 +54,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="rounded-lg bg-mb-speaker md:bg-tb-speaker lg:bg-dk-speaker py-20 bg-right text-left bg-cover mt-6 mx-6 md:mx-[40px] lg:mx-[165px]">
+      <div className="rounded-lg bg-mb-speaker  md:bg-tb-speaker lg:bg-dk-speaker py-20 bg-right text-left bg-cover mt-6 mx-6 md:mx-[40px] lg:mx-[165px]">
         <article className="px-6 md:mx-12">
           <h1 className="tracking-[2px] mt-8 mb-6 leading-10 text-secondary-dark font-bold text-ml ">
             ZX7 SPEAKER

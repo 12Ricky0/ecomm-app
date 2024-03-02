@@ -9,6 +9,7 @@ export default function ProductFooter() {
         width={100}
         height={207}
         className="w-[100%] md:hidden rounded-lg"
+        quality={100}
       />
       <Image
         src="/assets/shared/tablet/image-best-gear.jpg"
@@ -16,6 +17,7 @@ export default function ProductFooter() {
         width={688}
         height={340}
         className="w-[100%] md:block hidden lg:hidden rounded-lg"
+        quality={100}
       />
       <Image
         src="/assets/shared/desktop/image-best-gear.jpg"
@@ -23,6 +25,7 @@ export default function ProductFooter() {
         width={540}
         height={588}
         className="hidden lg:block rounded-lg"
+        quality={100}
       />
       <article className="text-center pt-[32px] lg:inline-flex items-center md:mx-auto lg:mx-0 md:w-[573px] lg:w-[445px]">
         <article>

@@ -32,6 +32,8 @@ const config: Config = {
       },
       gridTemplateColumns: {
         "4": "1fr,1fr, 3fr",
+        md: "1fr,1fr, 3.3fr",
+        con: "1.5fr,1fr",
       },
     },
     colors: {

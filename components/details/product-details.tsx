@@ -20,7 +20,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
         <GoBack />
       </div>
       <section className="mx-6 md:mx-[40px] lg:mx-[165px] lg:mb-[100px] mb-[60px]">
-        <article className="md:flex items-center justify-between">
+        <article className="md:grid grid-cols-2 gap-[125px] items-center justify-between">
           <Image
             src={detailedProduct?.image.mobile!}
             alt="headephone image"
@@ -44,7 +44,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
             className=" w-auto mr-7 mt-[56px] lg:block hidden rounded-lg "
             quality={100}
           />
-          <article className="lg:w-[445px] md:w-[340px]  text-left">
+          <article className="text-left ">
             <h3 className="leading-normal mt-8 tracking-[10px] text-primary-brown opacity-50 text-semi font-normal text-left">
               {detailedProduct.new === true && "NEW PRODUCT"}
             </h3>
@@ -67,8 +67,8 @@ export default async function ProductDetails({ slug }: { slug: string }) {
           </article>
         </article>
 
-        <article className=" md:mx-auto lg:flex justify-between">
-          <article className="text-left lg:w-[635px]">
+        <article className=" md:mx-auto lg:grid grid-cols-con gap-[125px] ">
+          <article className="text-left">
             <h1 className="text-[24px] md:text-[32px] md:tracking-[1.14px] md:leading-9 font-bold text-secondary-dark tracking-[0.86px] mt-[88px] leading-9">
               FEATURES
             </h1>
@@ -76,7 +76,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
               {detailedProduct?.features}
             </p>
           </article>
-          <article className="lg:mx-[120px] md:inline-flex justify-between lg:mt-[88px] md:mt-[120px] lg:block">
+          <article className=" md:inline-flex justify-between lg:mt-[88px] md:mt-[120px] lg:block">
             <h1 className="text-[24px] md:w-[340px] lg:w-auto md:text-[32px] md:tracking-[1.14px] md:leading-9 font-bold text-secondary-dark tracking-[0.86px] mt-[88px] md:mt-0 leading-9">
               IN THE BOX
             </h1>
@@ -123,7 +123,7 @@ export default async function ProductDetails({ slug }: { slug: string }) {
             />
           </div>
           {/* Tablet View */}
-          <div className="hidden lg:hidden md:grid grid-cols-4 grid-rows-4  gap-[30px]">
+          <div className="hidden lg:hidden md:grid grid-cols-md grid-rows-4  gap-[30px]">
             <div className=" col-span-2">
               <Image
                 src={detailedProduct?.gallery.first.tablet!}
@@ -169,7 +169,6 @@ export default async function ProductDetails({ slug }: { slug: string }) {
                 height={280}
                 className=" rounded-lg "
                 quality={100}
-                unoptimized={true}
               />
             </div>
             <div className="order-1 col-span-2">
@@ -180,7 +179,6 @@ export default async function ProductDetails({ slug }: { slug: string }) {
                 height={280}
                 className="rounded-lg"
                 quality={100}
-                unoptimized={true}
               />
             </div>
             <div className="row-span-2 object-cover w-[100%] bg-cover">
@@ -191,7 +189,6 @@ export default async function ProductDetails({ slug }: { slug: string }) {
                 height={592}
                 className="w rounded-lg "
                 quality={100}
-                // fill={true}
               />
             </div>
           </div>
