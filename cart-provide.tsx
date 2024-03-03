@@ -24,7 +24,7 @@ export default function CartProvider({
 
     getCookies()
       .then((data) => {
-        if (!data) {
+        if (data.length == 0) {
           setCookies([]);
           setCart([]);
         }

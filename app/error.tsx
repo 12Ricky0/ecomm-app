@@ -19,10 +19,7 @@ export default function Error({
       <h2 className="text-center">Something went wrong!</h2>
       <button
         className="h-12 w-40 border hover:bg-secondary-dark tracking-[1px] leading-normal text-primary-very-dark hover:text-secondary-white font-bold text-sm"
-        onClick={
-          // Attempt to recover by trying to re-render the invoices route
-          () => reset()
-        }
+        onClick={() => reset()}
       >
         Try again
       </button>
