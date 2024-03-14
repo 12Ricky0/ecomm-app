@@ -96,6 +96,7 @@ export function NavHeader({ cart }: { cart: CartType[] }) {
               SPEAKERS
             </Link>
             <Link
+              data-testid="earphones"
               className={`font-bold  text-sm leading-6 tracking-[2px] hover:outline-dashed outline-primary-brown ${
                 pathname === "/earphones"
                   ? "text-primary-brown"
@@ -109,7 +110,7 @@ export function NavHeader({ cart }: { cart: CartType[] }) {
           <div>
             <Image
               src="/assets/shared/desktop/icon-cart.svg"
-              alt="cart"
+              alt="carte"
               width={23}
               height={20}
               className="w-auto h-auto active:outline-dashed cursor-pointer"
