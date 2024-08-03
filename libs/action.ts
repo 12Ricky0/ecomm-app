@@ -52,4 +52,6 @@ export async function storedCookie() {
 
 export async function handleUserData(formData: FormData) {
   const rawFormData = Object.fromEntries(formData?.entries());
+
+  return rawFormData;
 }

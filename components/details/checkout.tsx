@@ -312,6 +312,8 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                     <h1 className="font-bold text-[15px] text-secondary-dark mr-[70px] inline-block leading-[25px] ">
                       {itemName[value.name as keyof typeof itemName]}
                     </h1>
+                    <input type="hidden" name="item_name" value={value.name} />
+
                     <p className="font-bold text-[14px] text-secondary-dark leading-[25px] opacity-50">
                       $ {new Intl.NumberFormat().format(Number(value.price))}
                     </p>
@@ -319,6 +321,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   <h1 className="font-bold md:mr-6 absolute lg:right-[165px] right-[48px] text-[15px] text-secondary-dark leading-[25px] inline-block opacity-50 ">
                     X{value.qty}
                   </h1>
+                  <input type="hidden" name="qty" value={value.qty} />
                 </div>
               </div>
             )
@@ -339,6 +342,11 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
               <h1 className="mt-6 text-primary-brown text-right">
                 $ {new Intl.NumberFormat().format(total + vat + 50)}
               </h1>
+              <input
+                type="hidden"
+                name="amount"
+                value={new Intl.NumberFormat().format(total + vat + 50)}
+              />
             </article>
           </article>
           <button
