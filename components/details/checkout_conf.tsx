@@ -10,19 +10,22 @@ const stripePromise = loadStripe(
 
 export default function CheckoutConfiguration({ cart }: { cart: any }) {
   const [clientSecret, setClientSecret] = useState("");
-  //   useEffect(() => {
-  //     // Create PaymentIntent as soon as the page loads
-  //     fetch("/api/create-payment-intent", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => setClientSecret(data.clientSecret));
-  //   }, []);
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: 1000 }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setClientSecret(data.clientSecret);
+      });
+  }, []);
 
   const appearance = {
     theme: "stripe",
+    variables: { colorPrimary: "#d87d4a" },
   };
   const options: any = {
     // clientSecret,
@@ -31,9 +34,14 @@ export default function CheckoutConfiguration({ cart }: { cart: any }) {
     amount: 200,
     currency: "usd",
   };
+
   return (
-    <Elements stripe={stripePromise} options={options}>
-      <Checkout cart={cart} />
-    </Elements>
+    <>
+      {clientSecret && (
+        <Elements stripe={stripePromise} options={options}>
+          <Checkout cart={cart} />
+        </Elements>
+      )}{" "}
+    </>
   );
 }

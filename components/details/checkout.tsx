@@ -15,12 +15,10 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
   const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
-  const paymentElementOptions = {
-    layout: "tabs",
-  };
-  const [clientSecret, setClientSecret] = useState("");
 
-  const [message, setMessage] = useState(null);
+  // const [clientSecret, setClientSecret] = useState("");
+
+  const [message, setMessage]: any = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   let total = 0;
@@ -41,17 +39,35 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
   const amount_to_pay = total + 50 + vat;
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch("/api/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: amount_to_pay }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setClientSecret(data.clientSecret);
-      });
-  }, [amount_to_pay]);
+    if (!stripe) {
+      return;
+    }
+
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+    );
+
+    if (!clientSecret) {
+      return;
+    }
+
+    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+      switch (paymentIntent?.status) {
+        case "succeeded":
+          setMessage("Payment succeeded!");
+          break;
+        case "processing":
+          setMessage("Your payment is processing.");
+          break;
+        case "requires_payment_method":
+          setMessage("Your payment was not successful, please try again.");
+          break;
+        default:
+          setMessage("Something went wrong.");
+          break;
+      }
+    });
+  }, [stripe]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
@@ -60,8 +76,30 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
+    setIsLoading(true);
 
-    router.push("/checkout/completed");
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        // Make sure to change this to your payment completion page
+        return_url: "http://localhost:3000/checkout/completed",
+      },
+    });
+
+    // This point will only be reached if there is an immediate error when
+    // confirming the payment. Otherwise, your customer will be redirected to
+    // your `return_url`. For some payment methods like iDEAL, your customer will
+    // be redirected to an intermediate site first to authorize the payment, then
+    // redirected to the `return_url`.
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setMessage(error.message);
+    } else {
+      setMessage("An unexpected error occurred.");
+    }
+
+    setIsLoading(false);
+
+    // router.push("/checkout/completed");
   };
 
   return (
@@ -391,11 +429,9 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
             PAYMENT DETAILS
           </h2>
 
-          {clientSecret && (
-            <div className="">
-              <PaymentElement options={{ layout: "accordion" }} />
-            </div>
-          )}
+          <div className="">
+            <PaymentElement options={{ layout: "accordion" }} />
+          </div>
 
           <button
             disabled={cart ? false : true}
@@ -404,6 +440,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
           >
             CONTINUE & PAY
           </button>
+          {message && <div id="payment-message">{message}</div>}
         </div>
       </article>
     </form>
