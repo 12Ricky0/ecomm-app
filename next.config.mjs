@@ -1,8 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    // images: {
-    //     unoptimized: true,
-    // },
-};
+// next.config.mjs
 
-export default nextConfig;
+import autoCert from "anchor-pki/auto-cert/integrations/next";
+
+const withAutoCert = autoCert({
+    enabledEnv: "development",
+});
+
+const nextConfig = {};
+
+export default withAutoCert(nextConfig);
+
