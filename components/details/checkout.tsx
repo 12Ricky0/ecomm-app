@@ -13,11 +13,12 @@ import {
 
 export default function Checkout({ cart }: { cart: CartType[] }) {
   const router = useRouter();
-  // const stripe = useStripe();
-  // const elements = useElements();
-  // const paymentElementOptions = {
-  //   layout: "tabs",
-  // };
+  const stripe = useStripe();
+  const elements = useElements();
+  const paymentElementOptions = {
+    layout: "tabs",
+  };
+  const [clientSecret, setClientSecret] = useState("");
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,14 +38,37 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
 
   const [isChecked, setIsChecked] = useState(false);
   // const f = new FormData();
+  const amount_to_pay = total + 50 + vat;
+
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: amount_to_pay }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setClientSecret(data.clientSecret);
+      });
+  }, [amount_to_pay]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
+    if (!stripe || !elements) {
+      // Stripe.js hasn't yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+
+    router.push("/checkout/completed");
+  };
 
   return (
     <form
       className="mx-6 md:mx-[40px] lg:mx-[165px] lg:flex justify-between overflow-hidden items-start text-[14px] caret-primary-brown"
       action={handleUserData}
-      onSubmit={() => {
-        router.push("/checkout/completed");
-      }}
+      onSubmit={handleSubmit}
     >
       <section className="text-[14px] font-bold lg:w-[100%] ">
         <GoBack />
@@ -188,7 +212,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
           <h2 className="text-sm lg:mx-12 md:mx-7 text-primary-brown font-bold tracking-[0.93px] leading-[25px] mb-4 mx-6 mt-[32px]">
             PAYMENT DETAILS
           </h2>
-          <div className="mx-6 lg:mx-12 md:mx-7 md:flex justify-between">
+          {/* <div className="mx-6 lg:mx-12 md:mx-7 md:flex justify-between">
             <label
               className="block text-[12px] text-secondary-dark font-bold leading-normal tracking-[-0.21px] mb-[9px] mt-6 md:mt-0"
               htmlFor="payment"
@@ -281,8 +305,8 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   autoComplete="off"
                 />
               </div>
-            </div>
-          ) : (
+            </div> */}
+          {/* ) : (
             <div className="lg:mx-12 md:mx-7 mx-6 flex gap-8 items-center mt-[30px]">
               <Image
                 src="/assets/checkout/icon-cash-on-delivery.svg"
@@ -298,11 +322,11 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                 cancelled.
               </p>
             </div>
-          )}
+          )} */}
         </fieldset>
       </section>
 
-      <article className="bg-secondary-white mx- rounded-lg pb-[32px] lg:ml-[30px] mt-8 lg:mt-[145px] shrink-0 lg:w-[350px]">
+      <article className="bg-secondary-white rounded-lg pb-[32px] lg:ml-[30px] mt-8 lg:mt-[145px] shrink-0 lg:w-[350px]">
         <h1 className="font-bold mx-6 pt-8 pb-[8px] leading-normal tracking-[1.29px] text-[18px]">
           SUMMARY
         </h1>
@@ -363,6 +387,16 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
               /> */}
             </article>
           </article>
+          <h2 className="text-sm text-primary-brown font-bold tracking-[0.93px] leading-[25px] mb-4  mt-[32px]">
+            PAYMENT DETAILS
+          </h2>
+
+          {clientSecret && (
+            <div className="">
+              <PaymentElement options={{ layout: "accordion" }} />
+            </div>
+          )}
+
           <button
             disabled={cart ? false : true}
             type="submit"

@@ -1,4 +1,5 @@
 import Checkout from "@/components/details/checkout";
+import CheckoutConfiguration from "@/components/details/checkout_conf";
 import Footer from "@/components/footer";
 import { cookies } from "next/headers";
 import { Metadata } from "next";
@@ -16,7 +17,7 @@ export default function CheckoutPage() {
 
   return (
     <div>
-      <Checkout cart={cookieStore} />
+      <CheckoutConfiguration cart={cookieStore} />
       <Footer />
     </div>
   );
