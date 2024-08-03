@@ -1,13 +1,27 @@
 "use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { handleUserData } from "@/libs/action";
-import { useState } from "react";
 import { CartType } from "@/libs/definitions";
 import { useRouter } from "next/navigation";
 import { GoBack } from "../buttons";
+import {
+  PaymentElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
 
 export default function Checkout({ cart }: { cart: CartType[] }) {
   const router = useRouter();
+  // const stripe = useStripe();
+  // const elements = useElements();
+  // const paymentElementOptions = {
+  //   layout: "tabs",
+  // };
+
+  const [message, setMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   let total = 0;
   const itemName = {
     "yx1-earphones": "yx1",
@@ -22,7 +36,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
   let vat = (total * 20) / 100;
 
   const [isChecked, setIsChecked] = useState(false);
-  const f = new FormData();
+  // const f = new FormData();
 
   return (
     <form
@@ -312,7 +326,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                     <h1 className="font-bold text-[15px] text-secondary-dark mr-[70px] inline-block leading-[25px] ">
                       {itemName[value.name as keyof typeof itemName]}
                     </h1>
-                    <input type="hidden" name="item_name" value={value.name} />
+                    {/* <input type="hidden" name="item_name" value={value.name} /> */}
 
                     <p className="font-bold text-[14px] text-secondary-dark leading-[25px] opacity-50">
                       $ {new Intl.NumberFormat().format(Number(value.price))}
@@ -321,7 +335,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
                   <h1 className="font-bold md:mr-6 absolute lg:right-[165px] right-[48px] text-[15px] text-secondary-dark leading-[25px] inline-block opacity-50 ">
                     X{value.qty}
                   </h1>
-                  <input type="hidden" name="qty" value={value.qty} />
+                  {/* <input type="hidden" name="qty" value={value.qty} /> */}
                 </div>
               </div>
             )
@@ -342,11 +356,11 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
               <h1 className="mt-6 text-primary-brown text-right">
                 $ {new Intl.NumberFormat().format(total + vat + 50)}
               </h1>
-              <input
+              {/* <input
                 type="hidden"
                 name="amount"
                 value={new Intl.NumberFormat().format(total + vat + 50)}
-              />
+              /> */}
             </article>
           </article>
           <button
