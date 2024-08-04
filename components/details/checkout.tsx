@@ -15,6 +15,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
   const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
+  const [clientSecret, setClientSecret] = useState("");
 
   // const [clientSecret, setClientSecret] = useState("");
 
@@ -36,16 +37,24 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
 
   const [isChecked, setIsChecked] = useState(false);
   // const f = new FormData();
-  const amount_to_pay = total + 50 + vat;
+  const amount_to_pay = (total + 50 + vat) * 100;
 
   useEffect(() => {
     if (!stripe) {
       return;
     }
 
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
+    fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: amount_to_pay }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setClientSecret(data.clientSecret);
+      });
+
+    // const clientSecret = client_secret;
 
     if (!clientSecret) {
       return;
@@ -67,7 +76,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
           break;
       }
     });
-  }, [stripe]);
+  }, [stripe, clientSecret, amount_to_pay]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
@@ -76,10 +85,17 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-    setIsLoading(true);
 
+    const { error: submitError } = await elements.submit();
+
+    if (submitError) {
+      setMessage(submitError.message);
+      setIsLoading(false);
+      return;
+    }
     const { error } = await stripe.confirmPayment({
       elements,
+      clientSecret,
       confirmParams: {
         // Make sure to change this to your payment completion page
         return_url: "http://localhost:3000/checkout/completed",

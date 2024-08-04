@@ -15,9 +15,19 @@ export default function CheckoutPage() {
     cookieStore = JSON.parse(cookies().getAll("item")[0].value);
   } catch (error) {}
 
+  let total = 0;
+
+  cookieStore && cookieStore.map((c: any) => (total += c.price * c.qty));
+  let vat = (total * 20) / 100;
+
+  const amount_to_pay = (total + 50 + vat) * 100;
+
   return (
     <div>
-      <CheckoutConfiguration cart={cookieStore} />
+      <CheckoutConfiguration
+        amount={Math.round(amount_to_pay)}
+        cart={cookieStore}
+      />
       <Footer />
     </div>
   );

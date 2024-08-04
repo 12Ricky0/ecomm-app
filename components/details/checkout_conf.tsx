@@ -8,7 +8,13 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
 );
 
-export default function CheckoutConfiguration({ cart }: { cart: any }) {
+export default function CheckoutConfiguration({
+  cart,
+  amount,
+}: {
+  cart: any;
+  amount: Number;
+}) {
   const [clientSecret, setClientSecret] = useState("");
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -31,8 +37,8 @@ export default function CheckoutConfiguration({ cart }: { cart: any }) {
     // clientSecret,
     appearance,
     mode: "payment",
-    amount: 200,
-    currency: "usd",
+    amount: amount,
+    currency: "sek",
   };
 
   return (
