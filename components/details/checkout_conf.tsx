@@ -17,7 +17,6 @@ export default function CheckoutConfiguration({
 }) {
   const [clientSecret, setClientSecret] = useState("");
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
     fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -34,7 +33,6 @@ export default function CheckoutConfiguration({
     variables: { colorPrimary: "#d87d4a" },
   };
   const options: any = {
-    // clientSecret,
     appearance,
     mode: "payment",
     amount: amount,

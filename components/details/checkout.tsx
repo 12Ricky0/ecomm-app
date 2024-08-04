@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { handleUserData } from "@/libs/action";
 import { CartType } from "@/libs/definitions";
-import { useRouter } from "next/navigation";
 import { GoBack } from "../buttons";
 import {
   PaymentElement,
@@ -12,13 +11,10 @@ import {
 } from "@stripe/react-stripe-js";
 
 export default function Checkout({ cart }: { cart: CartType[] }) {
-  const router = useRouter();
+  // const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
-
-  // const [clientSecret, setClientSecret] = useState("");
-
   const [message, setMessage]: any = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,8 +31,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
   cart && cart.map((c: CartType) => (total += c.price * c.qty));
   let vat = (total * 20) / 100;
 
-  const [isChecked, setIsChecked] = useState(false);
-  // const f = new FormData();
+  // const [isChecked, setIsChecked] = useState(false);
   const amount_to_pay = Math.round((total + 50 + vat) * 100);
 
   useEffect(() => {
@@ -53,8 +48,6 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
       .then((data) => {
         setClientSecret(data.clientSecret);
       });
-
-    // const clientSecret = client_secret;
 
     if (!clientSecret) {
       return;
@@ -81,8 +74,6 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     if (!stripe || !elements) {
-      // Stripe.js hasn't yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
 
@@ -97,17 +88,11 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
       elements,
       clientSecret,
       confirmParams: {
-        // Make sure to change this to your payment completion page
         return_url:
           "https://audiophile-phi-eight.vercel.app/checkout/completed",
       },
     });
 
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {

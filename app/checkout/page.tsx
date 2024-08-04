@@ -1,4 +1,3 @@
-import Checkout from "@/components/details/checkout";
 import CheckoutConfiguration from "@/components/details/checkout_conf";
 import Footer from "@/components/footer";
 import { cookies } from "next/headers";
