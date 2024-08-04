@@ -98,7 +98,8 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
       clientSecret,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/checkout/completed",
+        return_url:
+          "https://audiophile-phi-eight.vercel.app/checkout/completed",
       },
     });
 
