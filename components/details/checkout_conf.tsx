@@ -27,7 +27,7 @@ export default function CheckoutConfiguration({
       .then((data) => {
         setClientSecret(data.clientSecret);
       });
-  }, []);
+  }, [amount]);
 
   const appearance = {
     theme: "stripe",
