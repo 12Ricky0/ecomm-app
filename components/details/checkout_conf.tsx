@@ -38,7 +38,7 @@ export default function CheckoutConfiguration({
     appearance,
     mode: "payment",
     amount: amount,
-    currency: "sek",
+    currency: "usd",
   };
 
   return (

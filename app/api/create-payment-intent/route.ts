@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
   // try {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: amount,
-    currency: "sek",
+    currency: "usd",
     // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
     automatic_payment_methods: {
       enabled: true,

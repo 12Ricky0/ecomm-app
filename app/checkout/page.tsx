@@ -21,7 +21,6 @@ export default function CheckoutPage() {
   let vat = (total * 20) / 100;
 
   const amount_to_pay = (total + 50 + vat) * 100;
-
   return (
     <div>
       <CheckoutConfiguration

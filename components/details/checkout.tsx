@@ -37,7 +37,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
 
   const [isChecked, setIsChecked] = useState(false);
   // const f = new FormData();
-  const amount_to_pay = (total + 50 + vat) * 100;
+  const amount_to_pay = Math.round((total + 50 + vat) * 100);
 
   useEffect(() => {
     if (!stripe) {
@@ -445,9 +445,11 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
             PAYMENT DETAILS
           </h2>
 
-          <div className="">
-            <PaymentElement options={{ layout: "accordion" }} />
-          </div>
+          {clientSecret && (
+            <div className="">
+              <PaymentElement options={{ layout: "accordion" }} />
+            </div>
+          )}
 
           <button
             disabled={cart ? false : true}
