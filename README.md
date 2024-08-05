@@ -2,8 +2,6 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This is a solution to the [Audiophile e-commerce website challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/audiophile-ecommerce-website-C8cuSd_wx). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
-
 ## Table of contents
 
 - [Overview](#overview)
@@ -29,6 +27,9 @@ Users are able to:
   - VAT is calculated as 20% of the product total, excluding shipping
 - See an order confirmation modal after checking out with an order summary
 - Keep track of what's in the cart, even after refreshing the browser
+- Stripe is integrated into the checkout page where users get to choose payment methods based on their location
+
+**Stripe payment is a test hence any random card number can be entered**
 
 ### Screenshot
 
@@ -51,6 +52,7 @@ Users are able to:
 - TypeScript
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
+- [Stripe](https://stripe.com/)
 
 ## Author
 
