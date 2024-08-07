@@ -20,7 +20,7 @@ export default function CheckoutConfiguration({
     fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: 1000 }),
+      body: JSON.stringify({ amount: amount }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -43,7 +43,7 @@ export default function CheckoutConfiguration({
     <>
       {clientSecret && (
         <Elements stripe={stripePromise} options={options}>
-          <Checkout cart={cart} />
+          <Checkout clientSecret={clientSecret} cart={cart} />
         </Elements>
       )}{" "}
     </>

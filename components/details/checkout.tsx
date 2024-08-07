@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { handleUserData } from "@/libs/action";
 import { CartType } from "@/libs/definitions";
 import { GoBack } from "../buttons";
@@ -10,11 +10,17 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 
-export default function Checkout({ cart }: { cart: CartType[] }) {
+export default function Checkout({
+  cart,
+  clientSecret,
+}: {
+  cart: CartType[];
+  clientSecret: string;
+}) {
   // const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
-  const [clientSecret, setClientSecret] = useState("");
+  // const [clientSecret, setClientSecret] = useState("");
   const [message, setMessage]: any = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,16 +45,6 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
       return;
     }
 
-    fetch("/api/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: amount_to_pay }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setClientSecret(data.clientSecret);
-      });
-
     if (!clientSecret) {
       return;
     }
@@ -69,7 +65,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
           break;
       }
     });
-  }, [stripe, clientSecret, amount_to_pay]);
+  }, [stripe, amount_to_pay, clientSecret]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
@@ -88,8 +84,7 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
       elements,
       clientSecret,
       confirmParams: {
-        return_url:
-          "https://audiophile-phi-eight.vercel.app/checkout/completed",
+        return_url: "http://localhost:3000/checkout/completed",
       },
     });
 
@@ -320,11 +315,11 @@ export default function Checkout({ cart }: { cart: CartType[] }) {
             PAYMENT DETAILS
           </h2>
 
-          {clientSecret && (
+          {
             <div className="">
               <PaymentElement options={{ layout: "accordion" }} />
             </div>
-          )}
+          }
 
           <button
             disabled={cart ? false : true}
