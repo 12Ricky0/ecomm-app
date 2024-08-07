@@ -17,10 +17,8 @@ export default function Checkout({
   cart: CartType[];
   clientSecret: string;
 }) {
-  // const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
-  // const [clientSecret, setClientSecret] = useState("");
   const [message, setMessage]: any = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,7 +35,6 @@ export default function Checkout({
   cart && cart.map((c: CartType) => (total += c.price * c.qty));
   let vat = (total * 20) / 100;
 
-  // const [isChecked, setIsChecked] = useState(false);
   const amount_to_pay = Math.round((total + 50 + vat) * 100);
 
   useEffect(() => {
@@ -84,7 +81,8 @@ export default function Checkout({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "http://localhost:3000/checkout/completed",
+        return_url:
+          "https://audiophile-phi-eight.vercel.app/checkout/completed",
       },
     });
 
@@ -274,7 +272,6 @@ export default function Checkout({
                     <h1 className="font-bold text-[15px] text-secondary-dark mr-[70px] inline-block leading-[25px] ">
                       {itemName[value.name as keyof typeof itemName]}
                     </h1>
-                    {/* <input type="hidden" name="item_name" value={value.name} /> */}
 
                     <p className="font-bold text-[14px] text-secondary-dark leading-[25px] opacity-50">
                       $ {new Intl.NumberFormat().format(Number(value.price))}
@@ -283,7 +280,6 @@ export default function Checkout({
                   <h1 className="font-bold md:mr-6 absolute lg:right-[165px] right-[48px] text-[15px] text-secondary-dark leading-[25px] inline-block opacity-50 ">
                     X{value.qty}
                   </h1>
-                  {/* <input type="hidden" name="qty" value={value.qty} /> */}
                 </div>
               </div>
             )
@@ -304,29 +300,22 @@ export default function Checkout({
               <h1 className="mt-6 text-primary-brown text-right">
                 $ {new Intl.NumberFormat().format(total + vat + 50)}
               </h1>
-              {/* <input
-                type="hidden"
-                name="amount"
-                value={new Intl.NumberFormat().format(total + vat + 50)}
-              /> */}
             </article>
           </article>
           <h2 className="text-sm text-primary-brown font-bold tracking-[0.93px] leading-[25px] mb-4  mt-[32px]">
             PAYMENT DETAILS
           </h2>
 
-          {
-            <div className="">
-              <PaymentElement options={{ layout: "accordion" }} />
-            </div>
-          }
+          <div className="">
+            <PaymentElement options={{ layout: "accordion" }} />
+          </div>
 
           <button
             disabled={cart ? false : true}
             type="submit"
             className="h-12 w-[100%] mt-[32px] bg-primary-brown hover:bg-secondary-light-brown tracking-[1px] leading-normal text-secondary-white font-bold text-sm"
           >
-            CONTINUE & PAY
+            {isLoading ? "Processing..." : "CONTINUE & PAY"}
           </button>
           {message && <div id="payment-message">{message}</div>}
         </div>
