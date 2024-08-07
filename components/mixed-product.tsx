@@ -10,7 +10,6 @@ export default function MixedProduct() {
           alt="headphone"
           width={160}
           height={123}
-          // className="absolute left-[33%] md:left-[20%] w-auto h-auto  -translate-y-12 "
           className="left-[50%] w-auto h-auto -translate-x-[50%] -translate-y-[70px] absolute"
         />
         <h3 className="mb-[17px] pt-[100px]">HEADPHONES</h3>

@@ -93,8 +93,6 @@ export default function Checkout({
     }
 
     setIsLoading(false);
-
-    // router.push("/checkout/completed");
   };
 
   return (
