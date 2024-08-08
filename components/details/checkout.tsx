@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { handleUserData } from "@/libs/action";
 import { CartType } from "@/libs/definitions";
 import { GoBack } from "../buttons";

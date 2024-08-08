@@ -29,7 +29,15 @@ Users are able to:
 - Keep track of what's in the cart, even after refreshing the browser
 - Stripe is integrated into the checkout page where users get to choose payment methods based on their location
 
-**Stripe payment is a test hence any random card number can be entered**
+**Stripe payment is a test hence the following card number can be entered at checkout**
+
+```bash
+4242424242424242
+```
+
+```bash
+4000002500003155
+```
 
 ### Screenshot
 
