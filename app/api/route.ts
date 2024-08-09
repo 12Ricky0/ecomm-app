@@ -1,6 +1,5 @@
 import { mongoDBConnection } from "@/libs/action";
 import Product from "@/libs/schema";
-import mongoose from "mongoose";
 
 export const revalidate = true;
 

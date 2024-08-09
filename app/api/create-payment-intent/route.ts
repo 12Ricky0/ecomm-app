@@ -10,6 +10,5 @@ export async function POST(request: NextRequest) {
       enabled: true,
     },
   });
-  console.log(amount);
   return NextResponse.json({ clientSecret: paymentIntent.client_secret });
 }
