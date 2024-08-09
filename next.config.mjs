@@ -6,7 +6,9 @@ const withAutoCert = autoCert({
     enabledEnv: "development",
 });
 
-const nextConfig = {};
+const nextConfig = {
+    output: "standalone"
+};
 
 export default withAutoCert(nextConfig);
 
