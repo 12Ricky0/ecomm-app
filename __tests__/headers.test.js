@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom';
 import { NavHeader } from '../components/header';
 import { render, fireEvent, screen } from '@testing-library/react';
+import CartProvider, { CartContext } from '../cart-provide';
 
-jest.mock('../libs/action', () => ({
-    getCookies: jest.fn().mockResolvedValue({/* mock data here */ }),
-}));
+// jest.mock('../libs/action', () => ({
+//     getCookies: jest.fn().mockResolvedValue({/* mock data here */ }),
+// }));
 
 
 describe('NavHeader', () => {
